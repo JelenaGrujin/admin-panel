@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>picerija</title>
+<title>demo prikaz fomre</title>
 <meta charset="utf-8">
 <link  rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -38,7 +38,7 @@ $dodaci= isset($_GET["dodaci"])?$_GET["dodaci"]:array();
 	   echo "<li>$v</li>";
 	   echo"</ul>";
    }else{
-	   echo "...zapravo, praznu picu";
+	   echo "...je zapravo prazna";
    }?>
     <h2>Vasi podaci su:</h2>
 	<p>Ime: <?php echo $ime ?> <br>
