@@ -17,15 +17,7 @@ class Session{
 		session_start();
 		
 	}
-	
-	public function serialize($data){
-        return serialize($data);
-    }
 
-    public function unserialize($data){
-        return unserialize($data);
-    }
-    
 	public function create_session($session_name, $ses_array=false){
 		if (!isset($_SESSION[$session_name])) {
 			if ($ses_array==false) {
@@ -57,11 +49,18 @@ class Session{
 		}
 	}
 	
+	public function sessionExist($session_name){
+		
+		if(isset($_SESSION[$session_name])){
+			return true;
+		}
+		
+	}
+	
 	public function offSession($session_name){
 		
 		if (!empty($session_name)){
 			unset($_SESSION[$session_name]);
-			session_destroy();
 		}
 		
 	}
