@@ -5,25 +5,28 @@ require_once '../controller/ownerController.php';
 require_once '../controller/ProductTypeConteroller.php';
 require_once '../session/Session.php';
 
-class newProductController extends Controller{
-
-		public function __construct() {
-			parent::__construct();
+class newProductController extends Controller{	
+	
+	private $session_name='product';
+	
+	public function __construct() {
+		parent::__construct();
 	     	$this->dao = new DAO();
 	     	$this->daotype = new TypeDao();
 	     	$this->daoequipment = new EquipmentDao();
 	     	$this->daolone = new LocationOneDao();
 	     	$this->daoltwo = new LocationTwoDao();
 	     	$this->daolthree = new LocationThreeDao();
-			$this->daopro = new ProductDao();     
-			$this->daoown = new OwnersDao();
-			$this->daouser = new UserDao();
-			$this->daopropho = new ProPhoDao();
-			$this->daostructure = new StructureDao(); 
-			$this->owncon = new ownerController();
-			$this->protyco = new ProducTypeController();
-			$this->sesia = new Session();
-		}
+		$this->daopro = new ProductDao();     
+		$this->daoown = new OwnersDao();
+		$this->daouser = new UserDao();
+		$this->daopropho = new ProPhoDao();
+		$this->daostructure = new StructureDao(); 
+		$this->owncon = new ownerController();
+		$this->protyco = new ProducTypeController();
+		$this->sesia = new Session();
+
+	}
 	
 	public function showInfo(){
 		
@@ -35,71 +38,71 @@ class newProductController extends Controller{
 		$listlocation2=$this->daoltwo->selectFromLocation2();
 		$listlocation3=$this->daolthree->selectFromLocation3();
 		$strlist=$this->daostructure->selectFromStructure();
-		$session_name='product';
-		$sesia=$this->sesia->getSessionData($session_name);
-		
-		if ($sesia!=false){
-
-		foreach ($sesia as $info){
+ 
+		if ($this->sesia->sessionExist($this->session_name)==true){
+			$k=$this->sesia->getSessionData($this->session_name);
 			
-			$id_euro=$info['0']; 
-			$location_data_1=$info['1']; 
-			$location_data_2=$info['2']; 
-			$location_data_3=$info['3']; 
-			$addres_location=$info['4']; 
-			$adres_num=$info['5']; 
-			$number=$info['6']; 
-			$object=$info['7']; 
-			$flors=$info['8']; 
-			$of_flors=$info['9']; 
-			$price=$info['10']; 
-			$min_price=$info['11']; 
-			$deposit=$info['12']; 
-			$commission=$info['13']; 
-			$payment=$info['14']; 
-			$square=$info['15']; 
-			$surface_area=$info['16']; 
-			$equipment=$info['17']; 
-			$celing_height=$info['18']; 
-			$structure=$info['19']; 
-			//$hea=$info['21']; 
-			//$heating= explode(', ', $hea);
-			//$car=$info['22']; 
-			//$carpentry= explode(', ', $car);
-			$kitchen=$info['23']; 
-			$num_rooms=$info['24']; 
-			$num_bath=$info['25']; 
-			$num_wc=$info['26']; 
-			$num_terrace=$info['27']; 
-			$level=$info['28']; 
-			$salon_m=$info['29']; 
-			//$sec=$info['30'];
-			//$security= explode(', ', $sec); 
-			$num_elevator=$info['31']; 
-			$construc_year=$info['32']; 
-			$num_air_con=$info['33']; 
-			$num_garages=$info['34']; 
-			$note=$info['35']; 
-			$description=$info['36']; 
-			$active=$info['37']; 
-			$active_data=$info['38']; 
-			$info=$info['39']; 
-			//$electricity=$info['40']; 
-			//$network=$info['41']; 
-			//$maintenance=$info['42']; 
-			//$aces['43']; 
-			//$accessories= explode(', ', $aces);
-			//$gar=$info['44']; 
-			//$garage= explode(', ', $gar);
-			//$pro=$info['45']; 
-			//$provider= explode(', ', $pro);
-			//$ter=$info['46']; 
-			//$type_terrace= explode(', ', $ter);
-			//$bath=$info['47']; 
-			//$type_bath= explode(', ', $bath);
-			//$prod=$info['48'];
-			//$product_type= explode(', ', $prod);
-		}
+			foreach ($k as $key=>$dinfo) {
+			    	$id_euro=$dinfo['0'];
+				$location_data_1=$dinfo['1']; 
+				$location_data_2=$dinfo['2']; 
+				$location_data_3=$dinfo['3']; 
+				$addres_location=$dinfo['4']; 
+				$adres_num=$dinfo['5']; 
+				$number=$dinfo['6']; 
+				$object=$dinfo['7']; 
+				$flors=$dinfo['8']; 
+				$of_flors=$dinfo['9']; 
+				$price=$dinfo['10']; 
+				$min_price=$dinfo['11']; 
+				$deposit=$dinfo['12']; 
+				$commission=$dinfo['13']; 
+				$payment=$dinfo['14']; 
+				$square=$dinfo['15']; 
+				$surface_area=$dinfo['16']; 
+				$equipment=$dinfo['17']; 
+				$celing_height=$dinfo['18']; 
+				$structure=$dinfo['19']; 
+				$hea=$dinfo['20']; 
+				$heating= explode(', ', $hea);
+				$car=$dinfo['21']; 
+				$carpentry= explode(', ', $car);
+				$kitchen=$dinfo['22']; 
+				$num_rooms=$dinfo['23']; 
+				$num_bath=$dinfo['24']; 
+				$num_wc=$dinfo['25']; 
+				$num_terrace=$dinfo['26']; 
+				$level=$dinfo['27']; 
+				$salon_m=$dinfo['28']; 
+				$sec=$dinfo['29'];
+				$security= explode(', ', $sec); 
+				$num_elevator=$dinfo['30']; 
+				$construc_year=$dinfo['31']; 
+				$num_air_con=$dinfo['32']; 
+				$num_garages=$dinfo['33']; 
+				$note=$dinfo['34']; 
+				$description=$dinfo['35']; 
+				$active=$dinfo['36']; 
+				$active_data=$dinfo['37']; 
+				$info=$dinfo['38']; 
+				$electricity=$dinfo['39']; 
+				$network=$dinfo['40']; 
+				$maintenance=$dinfo['41']; 
+				$aces=$dinfo['42']; 
+				$accessories= explode(', ', $aces);
+				$gar=$dinfo['43']; 
+				$garage= explode(', ', $gar);
+				$pro=$dinfo['44']; 
+				$provider= explode(', ', $pro);
+				$ter=$dinfo['45']; 
+				$type_terrace= explode(', ', $ter);
+				$bath=$dinfo['46']; 
+				$type_bath= explode(', ', $bath);
+				$prod=$dinfo['47'];
+				$product_type= explode(', ', $prod);
+				$business_status=$dinfo['48'];
+			}
+			
 		}
 		
 		$page_new_product='active';
@@ -199,14 +202,14 @@ class newProductController extends Controller{
 		
 	}
 	
-	public function confirmInfo($datainfo){
+	public function insertInfo($datainfo){
 
 		if ($id_owner==NULL) {
 
 		$datainfo=array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
 			if ($datainfo){
-				$this->sesia->create_session('product');
-				$this->sesia->fillSession('product', $datainfo);
+				$this->sesia->create_session($this->session_name);
+				$this->sesia->fillSession($this->session_name, $datainfo);
 				$msg='successfully';
 				self::showOwner();
 			}else {
@@ -277,6 +280,7 @@ class newProductController extends Controller{
 		$prod=isset($_POST['product_type'])?$_POST['product_type']:array();
 		$hea=isset($_POST['heating'])?$_POST['heating']:array();
 		$car=isset($_POST['carpentry'])?$_POST['carpentry']:array();
+		$business_status=isset($_POST['business_status'])?$_POST['business_status']:"";
 		
 		$provider= implode(', ', $pro);
 		$type_bath=implode(', ', $bath);
@@ -293,13 +297,85 @@ class newProductController extends Controller{
 		
 	}
 	
+	public function unpackProductData($datafrompost){
+		
+		foreach ($datainfo as $k=>$dinfo) {
+				$id_euro=$dinfo['0']; 
+				$location_data_1=$dinfo['2']; 
+				$location_data_2=$dinfo['3']; 
+				$location_data_3=$dinfo['4']; 
+				$addres_location=$dinfo['5']; 
+				$adres_num=$dinfo['6']; 
+				$number=$dinfo['7']; 
+				$object=$dinfo['8']; 
+				$flors=$dinfo['9']; 
+				$of_flors=$dinfo['10']; 
+				$price=$dinfo['11']; 
+				$min_price=$dinfo['12']; 
+				$deposit=$dinfo['13']; 
+				$commission=$dinfo['14']; 
+				$payment=$dinfo['15']; 
+				$square=$dinfo['16']; 
+				$surface_area=$dinfo['17']; 
+				$equipment=$dinfo['18']; 
+				$celing_height=$dinfo['19']; 
+				$structure=$dinfo['20']; 
+				$hea=$dinfo['21']; 
+				$heating= explode(', ', $hea);
+				$car=$dinfo['22']; 
+				$carpentry= explode(', ', $car);
+				$kitchen=$dinfo['23']; 
+				$num_rooms=$dinfo['24']; 
+				$num_bath=$dinfo['25']; 
+				$num_wc=$dinfo['26']; 
+				$num_terrace=$dinfo['27']; 
+				$level=$dinfo['28']; 
+				$salon_m=$dinfo['29']; 
+				$sec=$dinfo['30'];
+				$security= explode(', ', $sec); 
+				$num_elevator=$dinfo['31']; 
+				$construc_year=$dinfo['32']; 
+				$num_air_con=$dinfo['33']; 
+				$num_garages=$dinfo['34']; 
+				$note=$dinfo['35']; 
+				$description=$dinfo['36']; 
+				$active=$dinfo['37']; 
+				$active_data=$dinfo['38']; 
+				$info=$dinfo['39']; 
+				$electricity=$dinfo['40']; 
+				$network=$dinfo['41']; 
+				$maintenance=$dinfo['42']; 
+				$aces=$dinfo['43']; 
+				$accessories= explode(', ', $aces);
+				$gar=$dinfo['44']; 
+				$garage= explode(', ', $gar);
+				$pro=$dinfo['45']; 
+				$provider= explode(', ', $pro);
+				$ter=$dinfo['46']; 
+				$type_terrace= explode(', ', $ter);
+				$bath=$dinfo['47']; 
+				$type_bath= explode(', ', $bath);
+				$prod=$dinfo['48'];
+				$product_type= explode(', ', $prod);
+				$business_status=$dinfo['48'];
+			}
+			
+			
+			return array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
+	
+	}
+	
 	public function pause(){
 		
+		$check=$this->sesia->offSession($this->session_name);
+		if ($check==true){
+			$this->sesia->offSession($this->session_name);
+		}
 		$datainfo=self::getData();
 		if ($datainfo){
 
-			$this->sesia->create_session('product');
-			$this->sesia->fillSession('product', $datainfo);
+			$this->sesia->create_session($this->session_name);
+			$this->sesia->fillSession($this->session_name, $datainfo);
 			$this->protyco->showTypeProduct();
 			
 		}else {
@@ -310,6 +386,13 @@ class newProductController extends Controller{
 		}
 		
 	}
+	
+	public function confirmData(){
+		
+		$datainfo=self::getData();
+		self::filterData($datainfo);
+	}
+	
 	public function showOwner(){
 		
 		$page_new_product='active';
@@ -349,7 +432,7 @@ class newProductController extends Controller{
 		
 				if ($fildoc || $fildoc == true){	
 		session_start();
-		$sesija=isset($_SESSION['product'])?$_SESSION['product']:array();
+		$sesija=isset($_SESSION[$this->session_name])?$_SESSION[$this->session_name]:array();
 
 		if ($sesija){
 			
@@ -368,72 +451,72 @@ class newProductController extends Controller{
 	
 		if (!empty($sesija)){
 
-		foreach ($sesija as $info){
+		foreach ($sesija as $dinfo){
 			
-			$id_euro=$info['0']; 
-			$date_insert=$info['1']; 
-			$location_data_1=$info['2']; 
-			$location_data_2=$info['3']; 
-			$location_data_3=$info['4']; 
-			$addres_location=$info['5']; 
-			$adres_num=$info['6']; 
-			$number=$info['7']; 
-			$object=$info['8']; 
-			$flors=$info['9']; 
-			$of_flors=$info['10']; 
-			$price=$info['11']; 
-			$min_price=$info['12']; 
-			$deposit=$info['13']; 
-			$commission=$info['14']; 
-			$payment=$info['15']; 
-			$square=$info['16']; 
-			$surface_area=$info['17']; 
-			$equipment=$info['18']; 
-			$celing_height=$info['19']; 
-			$structure=$info['20']; 
-			$hea=$info['21']; 
+			$id_euro=$dinfo['0']; 
+			$date_insert=$dinfo['1']; 
+			$location_data_1=$dinfo['2']; 
+			$location_data_2=$dinfo['3']; 
+			$location_data_3=$dinfo['4']; 
+			$addres_location=$dinfo['5']; 
+			$adres_num=$dinfo['6']; 
+			$number=$dinfo['7']; 
+			$object=$dinfo['8']; 
+			$flors=$dinfo['9']; 
+			$of_flors=$dinfo['10']; 
+			$price=$dinfo['11']; 
+			$min_price=$dinfo['12']; 
+			$deposit=$dinfo['13']; 
+			$commission=$dinfo['14']; 
+			$payment=$dinfo['15']; 
+			$square=$dinfo['16']; 
+			$surface_area=$dinfo['17']; 
+			$equipment=$dinfo['18']; 
+			$celing_height=$dinfo['19']; 
+			$structure=$dinfo['20']; 
+			$hea=$dinfo['21']; 
 			$heating= explode(', ', $hea);
-			$car=$info['22']; 
+			$car=$dinfo['22']; 
 			$carpentry= explode(', ', $car);
-			$kitchen=$info['23']; 
-			$num_rooms=$info['24']; 
-			$num_bath=$info['25']; 
-			$num_wc=$info['26']; 
-			$num_terrace=$info['27']; 
-			$level=$info['28']; 
-			$salon_m=$info['29']; 
-			$sec=$info['30'];
+			$kitchen=$dinfo['23']; 
+			$num_rooms=$dinfo['24']; 
+			$num_bath=$dinfo['25']; 
+			$num_wc=$dinfo['26']; 
+			$num_terrace=$dinfo['27']; 
+			$level=$dinfo['28']; 
+			$salon_m=$dinfo['29']; 
+			$sec=$dinfo['30'];
 			$security= explode(', ', $sec); 
-			$num_elevator=$info['31']; 
-			$construc_year=$info['32']; 
-			$num_air_con=$info['33']; 
-			$num_garages=$info['34']; 
-			$note=$info['35']; 
-			$description=$info['36']; 
-			$active=$info['37']; 
-			$active_data=$info['38']; 
-			$info=$info['39']; 
-			$electricity=$info['40']; 
-			$network=$info['41']; 
-			$maintenance=$info['42']; 
-			$aces['43']; 
+			$num_elevator=$dinfo['31']; 
+			$construc_year=$dinfo['32']; 
+			$num_air_con=$dinfo['33']; 
+			$num_garages=$dinfo['34']; 
+			$note=$dinfo['35']; 
+			$description=$dinfo['36']; 
+			$active=$dinfo['37']; 
+			$active_data=$dinfo['38']; 
+			$info=$dinfo['39']; 
+			$electricity=$dinfo['40']; 
+			$network=$dinfo['41']; 
+			$maintenance=$dinfo['42']; 
+			$aces=$dinfo['43']; 
 			$accessories= explode(', ', $aces);
-			$gar=$info['44']; 
+			$gar=$dinfo['44']; 
 			$garage= explode(', ', $gar);
-			$pro=$info['45']; 
+			$pro=$dinfo['45']; 
 			$provider= explode(', ', $pro);
-			$ter=$info['46']; 
+			$ter=$dinfo['46']; 
 			$type_terrace= explode(', ', $ter);
-			$bath=$info['47']; 
+			$bath=$dinfo['47']; 
 			$type_bath= explode(', ', $bath);
-			$prod=$info['48'];
+			$prod=$dinfo['48'];
 			$product_type= explode(', ', $prod);
 			
 		}
 		}
 			$this->daoproduct->insertIntoProducts(date('d-m-Y'), $location_data_1, $location_data_2, $location_data_3, $name, $serial, $number, $some_data, $area, $price, $deposit, $activiti, $date, $note, $description, $mo, $id_owner);
 			
-			unset($_SESSION['product']);
+			unset($_SESSION[$this->session_name]);
 			
 			$id_pro = $this->daoproduct->selectFromProductsLastOne();
 			$id_p=$id_pro['id_products'];
