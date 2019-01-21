@@ -113,95 +113,6 @@ class newProductController extends Controller{
 		
 	}
 	
-	public function filterData($datainfo){
-		$errors=array();
-
-	if (!empty($min_price) && !is_numeric($min_price)){
-				 $errors['min_price']='* number';
-					}
-			if (!empty($commission) && !is_numeric($commission)){
-				$errors['commission']='* number';
-					}
-			if (!empty($deposit) && !is_numeric($deposit)){
-				$errors['deposit']='* number';
-					}	
-			if (!empty($surface_area) && !is_numeric($surface_area)){
-				$errors['surface_area']='* number';
-					}
-			if (!empty($flors) && !is_numeric($flors)){
-				$errors['flors']='* number';
-					}elseif (!empty($of_flors) && !is_numeric($of_flors)){
-						$errors['of_flors']='*';
-						}elseif ($flors > $of_flors){
-							$errors['florsnost']='* uncorectly';
-						} 
-			if (!empty($num_elevator) && !is_numeric($num_elevator)){
-				$errors['num_elevator']='* number';
-					}
-			if (!empty($construc_year) && !is_numeric($construc_year)){
-				$errors['construc_year']='* number';
-					}
-			if (!empty($celing_height) && !is_numeric($celing_height)){
-				$errors['celing_height']='* number';
-					}
-			if (!empty($level) && !is_numeric($level)){
-				$errors['level']='* number';
-					}
-			if (!empty($salon_m) && !is_numeric($salon_m)){
-				$errors['salon_m']='* number';
-					}
-			if (!empty($num_rooms) && !is_numeric($num_rooms)){
-				$errors['num_rooms']='* number';
-					}
-			if (!empty($num_bath) && !is_numeric($num_bath)){
-				$errors['num_bath']='* unumber';
-					}
-			if (!empty($num_wc) && !is_numeric($num_wc)){
-				$errors['num_wc']='* number';
-					}
-			if (!empty($num_terrace) && !is_numeric($num_terrace)){
-				$errors['num_terrace']='* number';
-					}
-			if (!empty($num_air_con) && !is_numeric($num_air_con)){
-				$errors['num_air_con']='* number';
-					}
-			if(empty($location_data_1)){
-				$errors['location_data_1']='* required';}
-			if(empty($location_data_2)){
-				$errors['location_data_2']='* required';}
-			if(empty($location_data_3)){
-				$errors['location_data_3']='* required';}
-			if(empty($addres_location)){
-				$errors['addres_location']='* required';}
-			if(empty($adres_num)){
-				$errors['adres_num']='*';}
-			if(empty($number)){
-				$errors['number']='*';}
-			if(empty($prod)){
-				$errors['tip_nekretnine']='* required';}
-			if(empty($structure)){
-				$errors['structure']='* required';}
-			if(empty($square)){
-				$errors['square']='* required';
-			}elseif (is_numeric($square)){
-					}else{$errors['square']='* number';}
-			if(empty($price)){
-				$errors['price']='* required';
-			}elseif (is_numeric($price)){
-					}else{$errors['price']='* number';}
-					
-		if (count($errors)==0){
-			self::confirmInfo($datainfo);
-			
-		
-		}else {
-			 $msg='something is wrong';
-			
-			self::showInfo();
-		}
-		
-	}
-	
 	public function insertInfo($datainfo){
 
 		if ($id_owner==NULL) {
@@ -388,9 +299,14 @@ class newProductController extends Controller{
 	}
 	
 	public function confirmData(){
-		
-		$datainfo=self::getData();
-		self::filterData($datainfo);
+		//make rules array!!!!
+		$data=self::getData();
+		$filter=$this->v->validate($data, $rules);
+		if (!empty($filter)){
+			self::showInfo();
+		}else {
+			self::insertInfo($data);
+		}
 	}
 	
 	public function showOwner(){
