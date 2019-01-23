@@ -1,13 +1,8 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
 	$user=unserialize($_SESSION['user']);
 	$page_home = isset($page_homepa)?$page_homepa:"";
 	$page_product = isset($page_productpa)?$page_productpa:"";
 	$page_pro_type = isset($page_basepa)?$page_basepa:"";
-	if ($user) {
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="navbar-brand text-white font-weight-bold">Admin panel</div>
@@ -30,8 +25,3 @@
 		<a class="btn bg-danger text-white font-weight-bold" href="routes.php?page=Logout">Log out</a>
 	</div>
 </nav>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
