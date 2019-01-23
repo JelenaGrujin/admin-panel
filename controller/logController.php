@@ -1,16 +1,18 @@
 <?php 
 
 require_once 'Controller.php';
+require_once 'HomeController.php';
 
 class logController extends Controller{
+	
+	protected $session_name='user';
 	
 	public function __construct(){
 		
 		parent::__construct();
 		$this->daouser = new UserDao();
-		$this->daoproduct = new ProductDao();
-		$this->daoowner = new OwnersDao();
-		
+		$this->home = new homeController();
+		$this->sesion = new Session();
 	}
 	
 	public function login(){
@@ -23,38 +25,31 @@ class logController extends Controller{
 		
 		if(!empty($username)&&!empty($pass)){
 			
-			
 			$user=$this->daouser->selectUserByUsernameAndPassword($username, $pass);
-			
-			if($user){
-				
-				session_start();
-				$_SESSION['user']=serialize($user);
-		
-				$productlist=$this->daoproduct->selectFromProducts();
-				$ownerlist=$this->daoowner->selectFromOwners();
-
-				$page_homepa = 'active';
-				include 'homefiles/home_link.php';
-				
-			}else{
-				 $user=$this->daouser->selectUserByUsernameAndPassword($username, $pass);
-
-				$msg='Wrong username and password.';
-				include 'login.php';
-			}
+			self::userExsist($user); 
 			
 		}else{
-			$msg='Try again.';
-			include 'login.php';
+			header('Location:login.php?msgg=You need to log in');
 		}
 		
+	}
 	
+	public function userExsist($user){
+		
+		$this->sesion->create_session($this->session_name);
+				
+		$_SESSION[$this->session_name]=serialize($user);
+
+		if ($this->sesion->sessionExist($this->session_name)){ //redirect for now
+			$this->home->showHome();
+		}else {
+			header('Location:login.php?msgg=You need to log in');
+		}
+			
 	}
 	 
 	public function logout(){
-		
-		session_start();
+
 		session_unset();
 		session_destroy();
 		header('Location:login.php');
