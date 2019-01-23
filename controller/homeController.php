@@ -17,6 +17,11 @@ class homeController extends Controller{
 		
 		$productlist=$this->daoproduct->selectFromProducts();
 		$ownerlist=$this->daoowner->selectFromOwners();
+		
+		$makemonth=date("d-m-Y", strtotime("+1 months")); 
+		$makeweek=date("d-m-Y", strtotime("+1 week")); 
+		$makeday=date("d-m-Y", strtotime("+1 day"));
+		$maked=date("d-m-Y", strtotime("-1 day"));
 
 		$page_homepa = 'active';
 		include 'homefiles/home_link.php';
