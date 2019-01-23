@@ -1,18 +1,8 @@
-<?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-	
-	if ($ulogovan) {
-		
+<?php	
 	$msg=isset($msg)?$msg:"";
 	$nekretnine=isset($nekretnine)?$nekretnine:"";
 	$klijent=isset($klijent)?$klijent:"";
 	$fotografije=isset($fotografije)?$fotografije:array();
-					
-	
 ?>
 <div class="">
 <div class="card">
@@ -58,8 +48,3 @@
 </div>
 </div>
 </div>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
