@@ -1,21 +1,7 @@
-<?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
-	
-	if ($user) {
-		
+<?php	
 	$msg=isset($msg)?$msg:"";
 	$kukipro=isset($_COOKIE['kukit'])?$_COOKIE['kukit']:"";
 	$kukiown=isset($_COOKIE['kukio'])?$_COOKIE['kukio']:"";
-	$makemonth=date("d-m-Y", strtotime("+1 months")); 
-	$makeweek=date("d-m-Y", strtotime("+1 week")); 
-	$makeday=date("d-m-Y", strtotime("+1 day"));
-	$maked=date("d-m-Y", strtotime("-1 day"));
-					
-	
 ?>
 <div class="">
 		<div class="row wrapper bg-faded ml-3 mr-3">
@@ -155,8 +141,3 @@
 			</div>
 		</div>
 </div>
-<?php 
-	} else {
-		header('Location:../login.php?msgg=You need to log in');
-	}
-?>
