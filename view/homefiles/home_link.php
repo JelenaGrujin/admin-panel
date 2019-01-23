@@ -1,15 +1,8 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	
 	$page_home = isset($page_homepa)?$page_homepa:"";
 	$page_birth_view = isset($page_birthday_view)?$page_birthday_view:"";
-	
-	if ($user) {
 ?>
 <html lang="sr">
 	<?php include 'head.php'; ?>
@@ -40,8 +33,3 @@
 		</div>
 	</body>
 </html>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
