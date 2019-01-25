@@ -14,8 +14,8 @@ class logController extends Controller{
 		$this->home = new homeController();
 		$this->sesion = new Session();
 	}
-	
-	public function login(){
+
+		public function login(){
 		
 		$username=isset($_POST['username'])?$_POST['username']:"";
 		$password=isset($_POST['password'])?$_POST['password']:"";
@@ -40,10 +40,10 @@ class logController extends Controller{
 				
 		$_SESSION[$this->session_name]=serialize($user);
 
-		if ($this->sesion->sessionExist($this->session_name)){ //redirect for now
+		if ($this->sesion->sessionExist($this->session_name)){
 			$this->home->showHome();
 		}else {
-			header('Location:login.php?msgg=You need to log in');
+			header('Location:index.php?msgg=You need to log in');
 		}
 			
 	}
