@@ -43,7 +43,7 @@ class logController extends Controller{
 		if ($this->sesion->sessionExist($this->session_name)){
 			$this->home->showHome();
 		}else {
-			header('Location:index.php?msgg=You need to log in');
+			header('Location:login.php?msgg=You need to log in');
 		}
 			
 	}
