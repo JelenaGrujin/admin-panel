@@ -15,37 +15,38 @@ class logController extends Controller{
 		$this->sesion = new Session();
 	}
 
-		public function login(){
+	public function login(){
 		
 		$username=isset($_POST['username'])?$_POST['username']:"";
 		$password=isset($_POST['password'])?$_POST['password']:"";
-				
-		$salted="4f3gv4fsd354g.$password.4g56hert";		
-		$pass=hash('md5', $salted);
 		
-		if(!empty($username)&&!empty($pass)){
-			
-			$user=$this->daouser->selectUserByUsernameAndPassword($username, $pass);
-			self::userExsist($user); 
-			
-		}else{
-			header('Location:login.php?msgg=You need to log in');
-		}
+		$this->user->setUsername($username);
+		$this->user->setPassword($password);
+		
+		self::get_data();
 		
 	}
 	
-	public function userExsist($user){
+	public function get_data(){
 		
-		$this->sesion->create_session($this->session_name);
-				
-		$_SESSION[$this->session_name]=serialize($user);
+		
+		$username=$this->user->getUsername();
+		$password=$this->user->getPassword();
+		
+		$pass=$this->user->salted($password);
 
-		if ($this->sesion->sessionExist($this->session_name)){
-			$this->home->showHome();
+		$user=$this->daouser->selectUserByUsernameAndPassword($username, $pass);
+			if ($user==null){
+			echo $msg='nema';
 		}else {
-			header('Location:login.php?msgg=You need to log in');
+		
+			$this->sesion->create_session($this->session_name);
+					
+			$_SESSION[$this->session_name]=serialize($user);
+			echo $msg='ima';
 		}
-			
+		include 'login.php';
+		
 	}
 	 
 	public function logout(){
