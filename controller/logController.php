@@ -50,8 +50,7 @@ class logController extends Controller{
 		
 		if ($this->sesion->sessionExist($this->session_name)==true){
 			
-			include 'login.php';
-			echo $msg='bravisimo';
+			$this->home->showHome();
 		}else {
 			header('Location:login.php?$msgg=you must log in');
 			
