@@ -5,7 +5,7 @@
 	$page_birth_view = isset($page_birthday_view)?$page_birthday_view:"";
 ?>
 <html lang="sr">
-	<?php include 'head.php'; ?>
+	<?php include 'header.php'; ?>
 	<body class="bg-light">
 		<?php include 'app_nav.php';?>
 			<?php include 'nav.php';?>
