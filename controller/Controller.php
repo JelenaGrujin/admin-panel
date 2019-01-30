@@ -1,7 +1,16 @@
 <?php
-function __autoload($class){
-	include '../model/'.$class.'.php';
-}
+require_once '../model/DAO.php';
+require_once '../model/TypeDao.php';
+require_once '../model/EquipmentDao.php';
+require_once '../model/LocationOneDao.php';
+require_once '../model/LocationTwoDao.php';
+require_once '../model/LocationThreeDao.php';
+require_once '../model/ProductDao.php';
+require_once '../model/OwnersDao.php';
+require_once '../model/UserDao.php';
+require_once '../model/ProPhoDao.php';
+require_once '../model/OwnDocDao.php';
+require_once '../model/StructureDao.php';
 
 class Controller{
 
