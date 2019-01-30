@@ -17,6 +17,12 @@ class Session{
 		session_start();
 		
 	}
+	
+	public function serializeSession($session_name, $data) {
+		
+		$_SESSION[$session_name]=serialize($data);
+	
+	}
 
 	public function create_session($session_name, $ses_array=false){
 		if (!isset($_SESSION[$session_name])) {
