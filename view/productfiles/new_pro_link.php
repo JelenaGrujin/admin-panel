@@ -14,7 +14,7 @@
 <html lang="en">
 	<?php include 'head.php'; ?>
 	<body class="bg-light">
-		<?php include 'index.php';?>
+		<?php include 'app_nav.php';?>
 		<?php include 'nav.php';?>
 		<div class="wrapper bg-faded ml-3 mr-3">
 		
