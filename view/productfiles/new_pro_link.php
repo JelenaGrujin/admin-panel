@@ -12,7 +12,7 @@
 	if ($ulogovan) {
 ?>
 <html lang="en">
-	<?php include 'head.php'; ?>
+	<?php include 'header.php'; ?>
 	<body class="bg-light">
 		<?php include 'app_nav.php';?>
 		<?php include 'nav.php';?>
