@@ -7,7 +7,7 @@
 <html lang="sr">
 	<?php include 'head.php'; ?>
 	<body class="bg-light">
-		<?php include 'index.php';?>
+		<?php include 'app_nav.php';?>
 			<?php include 'nav.php';?>
 			<div class="wrapper bg-faded ml-2 mr-2">
 			<span class="text-dark">
