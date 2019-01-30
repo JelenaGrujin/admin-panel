@@ -31,7 +31,7 @@ if ($user){
 <html lang="sr">
 	<?php include 'head.php'; ?>
 	<body class="bg-light">
-		<?php include 'index.php';?>
+		<?php include 'app_nav.php';?>
 		<div class="wrapper bg-faded ml-3 mr-3">
 			<?php include 'base_nav.php';?>
 			<span class="text-dark">
