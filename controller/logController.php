@@ -36,17 +36,26 @@ class logController extends Controller{
 		$pass=$this->user->salted($password);
 
 		$user=$this->daouser->selectUserByUsernameAndPassword($username, $pass);
-			if ($user==null){
-			echo $msg='nema';
-		}else {
-		
+		if ($user!==null){
+				
 			$this->sesion->create_session($this->session_name);
-					
-			$_SESSION[$this->session_name]=serialize($user);
-			echo $msg='ima';
+			$this->sesion->serializeSession($this->session_name, $user);
 		}
-		include 'login.php';
 		
+		self::redirect();
+		
+	}
+	
+	public function redirect() {
+		
+		if ($this->sesion->sessionExist($this->session_name)==true){
+			
+			include 'login.php';
+			echo $msg='bravisimo';
+		}else {
+			header('Location:login.php?$msgg=you must log in');
+			
+		}
 	}
 	 
 	public function logout(){
