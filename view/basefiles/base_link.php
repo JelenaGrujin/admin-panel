@@ -29,7 +29,7 @@ if ($user){
 
 ?>
 <html lang="sr">
-	<?php include 'head.php'; ?>
+	<?php include 'header.php'; ?>
 	<body class="bg-light">
 		<?php include 'app_nav.php';?>
 		<div class="wrapper bg-faded ml-3 mr-3">
