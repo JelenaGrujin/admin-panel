@@ -20,7 +20,7 @@
 	if ($user) {
 ?>
 <html lang="sr">
-	<?php include 'head.php'; ?>
+	<?php include 'header.php'; ?>
 	<body class="bg-white">
 		<?php include 'app_nav.php';?>
 		<?php include 'nav.php';?>
