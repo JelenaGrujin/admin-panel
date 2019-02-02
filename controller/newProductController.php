@@ -7,6 +7,7 @@ require_once '../session/Session.php';
 
 class newProductController extends Controller{	
 	
+	public $datainfo=array('id_euro', 'location_data_1', 'location_data_2', 'location_data_3', 'addres_location', 'adres_num', 'number', 'object', 'flors', 'of_flors', 'price', 'min_price', 'deposit', 'commission', 'payment', 'square', 'surface_area', 'equipment', 'celing_height', 'structure', 'heating', 'carpentry', 'kitchen', 'num_rooms', 'num_bath', 'num_wc', 'num_terrace', 'level', 'salon_m', 'security', 'num_elevator', 'construc_year', 'num_air_con', 'num_garages', 'note', 'description', 'active', 'active_data', 'info', 'electricity', 'network', 'maintenance', 'accessories', 'garage', 'provider', 'type_terrace', 'type_bath', 'product_type', 'business_status');
 	private $session_name='product';
 	
 	public function __construct() {
@@ -203,8 +204,9 @@ class newProductController extends Controller{
 		$security=implode(', ', $sec);
 		$garage=implode(', ', $gar);
 		
-		$datainfo=array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
-		return $datainfo;
+		$postinfo=array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
+		$productinfo=array_combine($this->datainfo, $postinfo);
+		return $productinfo;
 		
 	}
 	
@@ -278,23 +280,24 @@ class newProductController extends Controller{
 	
 	public function pause(){
 		
-		$check=$this->sesia->offSession($this->session_name);
-		if ($check==true){
+		if ($this->sesia->sessionExist($this->session_name)==true){
 			$this->sesia->offSession($this->session_name);
 		}
-		$datainfo=self::getData();
-		if ($datainfo){
+		$productinfo=self::getData();
+		
 
 			$this->sesia->create_session($this->session_name);
-			$this->sesia->fillSession($this->session_name, $datainfo);
+			$this->sesia->fillSession($this->session_name, $productinfo);
+			
+		//if (--){
 			$this->protyco->showTypeProduct();
 			
-		}else {
+		//}else {
 			
-			$msg='try again';
-			self::showInfo();
+		//	$msg='try again';
+		//	self::showInfo();
 			
-		}
+		//}
 		
 	}
 	
