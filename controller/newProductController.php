@@ -210,74 +210,6 @@ class newProductController extends Controller{
 		
 	}
 	
-	public function unpackProductData($datafrompost){
-		
-		foreach ($datainfo as $k=>$dinfo) {
-				$id_euro=$dinfo['0']; 
-				$location_data_1=$dinfo['2']; 
-				$location_data_2=$dinfo['3']; 
-				$location_data_3=$dinfo['4']; 
-				$addres_location=$dinfo['5']; 
-				$adres_num=$dinfo['6']; 
-				$number=$dinfo['7']; 
-				$object=$dinfo['8']; 
-				$flors=$dinfo['9']; 
-				$of_flors=$dinfo['10']; 
-				$price=$dinfo['11']; 
-				$min_price=$dinfo['12']; 
-				$deposit=$dinfo['13']; 
-				$commission=$dinfo['14']; 
-				$payment=$dinfo['15']; 
-				$square=$dinfo['16']; 
-				$surface_area=$dinfo['17']; 
-				$equipment=$dinfo['18']; 
-				$celing_height=$dinfo['19']; 
-				$structure=$dinfo['20']; 
-				$hea=$dinfo['21']; 
-				$heating= explode(', ', $hea);
-				$car=$dinfo['22']; 
-				$carpentry= explode(', ', $car);
-				$kitchen=$dinfo['23']; 
-				$num_rooms=$dinfo['24']; 
-				$num_bath=$dinfo['25']; 
-				$num_wc=$dinfo['26']; 
-				$num_terrace=$dinfo['27']; 
-				$level=$dinfo['28']; 
-				$salon_m=$dinfo['29']; 
-				$sec=$dinfo['30'];
-				$security= explode(', ', $sec); 
-				$num_elevator=$dinfo['31']; 
-				$construc_year=$dinfo['32']; 
-				$num_air_con=$dinfo['33']; 
-				$num_garages=$dinfo['34']; 
-				$note=$dinfo['35']; 
-				$description=$dinfo['36']; 
-				$active=$dinfo['37']; 
-				$active_data=$dinfo['38']; 
-				$info=$dinfo['39']; 
-				$electricity=$dinfo['40']; 
-				$network=$dinfo['41']; 
-				$maintenance=$dinfo['42']; 
-				$aces=$dinfo['43']; 
-				$accessories= explode(', ', $aces);
-				$gar=$dinfo['44']; 
-				$garage= explode(', ', $gar);
-				$pro=$dinfo['45']; 
-				$provider= explode(', ', $pro);
-				$ter=$dinfo['46']; 
-				$type_terrace= explode(', ', $ter);
-				$bath=$dinfo['47']; 
-				$type_bath= explode(', ', $bath);
-				$prod=$dinfo['48'];
-				$product_type= explode(', ', $prod);
-				$business_status=$dinfo['48'];
-			}
-			
-			
-			return array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
-	
-	}
-	
 	public function pause(){
 		
 		if ($this->sesia->sessionExist($this->session_name)==true){
@@ -321,7 +253,7 @@ class newProductController extends Controller{
 	
 	}
 	
-		public function showCorporate() {
+	public function showCorporate() {
 		
 		$agentlist=$this->daouser->selectFromUsers();
 
