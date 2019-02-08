@@ -1,0 +1,10 @@
+{
+    "name": "zverina/admin-panel",
+    "require": {},
+	
+	"autoload":{
+		"psr-4":{
+			"Admin\\":"src/"
+		}
+	}
+}
