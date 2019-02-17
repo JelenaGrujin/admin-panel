@@ -1,6 +1,12 @@
 <?php 
+namespace Admin\controller;
 
-require_once '../controller/Controller.php';
+use Admin\controller\Controller;
+use Admin\model\UserDao;
+use Admin\model\ProductDao;
+use Admin\model\OwnersDao;
+use Admin\model\OwnDocDao;
+use Admin\model\ProPhoDao;
 
 class OwnerController extends Controller{
 
