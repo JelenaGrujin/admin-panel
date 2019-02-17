@@ -1,4 +1,8 @@
 <?php
+namespace Admin\config;
+
+use PDO;
+
 	class DB  {
 	
   	private static $instance = null;
