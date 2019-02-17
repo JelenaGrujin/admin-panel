@@ -1,17 +1,8 @@
 <?php
 
-require_once '../model/DAO.php';
-require_once '../model/TypeDao.php';
-require_once '../model/EquipmentDao.php';
-require_once '../model/LocationOneDao.php';
-require_once '../model/LocationTwoDao.php';
-require_once '../model/LocationThreeDao.php';
-require_once '../model/ProductDao.php';
-require_once '../model/OwnersDao.php';
-require_once '../model/UserDao.php';
-require_once '../model/ProPhoDao.php';
-require_once '../model/OwnDocDao.php';
-require_once '../model/StructureDao.php';
+namespace Admin\controller;
+ 
+use Admin\model\DAO;
 
 class Controller{
 
@@ -107,7 +98,7 @@ class Controller{
 			}
 			$moguce=10-count($provera_imena);
 			if (count($naziv_dokumenta)+count($provera_imena)>10){
-				$errors['mnogo_dok']='* Mozete dodati najviše '.$moguce.' dokumenata';
+				$errors['mnogo_dok']='* Mozete dodati najviÅ¡e '.$moguce.' dokumenata';
 			}	
 		if (count($errors)==0){
 			foreach ($_FILES['doc']['tmp_name'] as $key=>$tmp_name){
@@ -180,9 +171,9 @@ class Controller{
 	
 		if ($novi_status){
 			$nova=$this->dao->insertIntoStatusPotraznje($novi_status);
-			$msg='Uspešno ste upisali novi status potražnje';
+			$msg='UspeÅ¡no ste upisali novi status potraÅ¾nje';
 		}else {
-			$msg='Neuspešno, pokušajte ponovo';
+			$msg='NeuspeÅ¡no, pokuÅ¡ajte ponovo';
 		}
 		
 		$potraznja=$this->dao->selectFromStatusPotraznje();
