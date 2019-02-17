@@ -1,7 +1,8 @@
 <?php 
+namespace Admin\model;
 
-		require_once '../config/db.php';
-		require_once 'DAO.php';
+use Admin\config\DB;
+use Admin\model\DAO;
 
 class LocationThreeDao extends DAO{
 	
