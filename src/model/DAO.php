@@ -1,6 +1,8 @@
 <?php
-		require_once '../config/db.php';
-	
+namespace Admin\model;
+
+use Admin\config\DB;
+
 	class DAO {
 	    private $db;
    
