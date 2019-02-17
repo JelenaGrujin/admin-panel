@@ -1,8 +1,11 @@
 <?php 
+namespace Admin\controller;
 
-require_once 'Controller.php';
-require_once 'HomeController.php';
-require_once '../classes/Login.php';
+use Admin\controller\Controller;
+use Admin\controller\HomeController;
+use Admin\classes\Login;
+use Admin\session\Session;
+use Admin\model\UserDao;
 
 class LogController extends Controller{
 	
