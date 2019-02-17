@@ -1,4 +1,5 @@
 <?php 
+namespace Admin\session;
 
 class Session{
 	
