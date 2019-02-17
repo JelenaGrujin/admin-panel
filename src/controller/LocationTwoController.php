@@ -1,6 +1,8 @@
 <?php
+namespace Admin\controller;
 
-require_once 'Controller.php';
+use Admin\controller\Controller;
+use Admin\model\LocationTwoDao;
 
 class LocationTwoController extends Controller{
 
