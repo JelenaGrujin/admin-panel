@@ -1,6 +1,10 @@
 <?php 
+namespace Admin\controller;
 
-require_once 'Controller.php';
+use Admin\controller\Controller;
+use Admin\model\ProductDao;
+use Admin\model\OwnersDao;
+use Admin\model\ProPhoDao;
 
 class HomeController extends Controller{
 	
