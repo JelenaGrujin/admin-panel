@@ -3,6 +3,17 @@
 namespace Admin\controller;
  
 use Admin\model\DAO;
+use Admin\model\TypeDao;
+use Admin\model\EquipmentDao;
+use Admin\model\LocationOneDao;
+use Admin\model\LocationTwoDao;
+use Admin\model\LocationThreeDao;
+use Admin\model\ProductDao;
+use Admin\model\OwnersDao;
+use Admin\model\UserDao;
+use Admin\model\ProPhoDao;
+use Admin\model\OwnDocDao;
+use Admin\model\StructureDao;
 
 class Controller{
 
