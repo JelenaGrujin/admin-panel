@@ -1,6 +1,8 @@
 <?php
-		require_once '../config/db.php';
-		require_once 'DAO.php';
+namespace Admin\model;		
+
+use Admin\config\DB;
+use Admin\model\DAO;
 	
 	class OwnersDao extends DAO {
          private $INSERT_INTO_OWNERS="INSERT INTO owners(data_insert, owner_name, phone, phone_1, e_mail, source, b_day, title, owner_type, owner_address, e_mail_owner, name_3, phone_3, e_mail_3, name_4, phone_4, e_mail_4, name_5, phone_5, e_mail_5, name_6, phone_6, e_mail_6, name_7, phone_7, e_mail_7, name_8, phone_8, e_mail_8, name_9, phone_9, e_mail_9, company_name, tin, company_num, activity_code, company_adres, responsible_person, id_num, UMCN, agent, type_owner) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
