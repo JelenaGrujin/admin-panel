@@ -1,6 +1,7 @@
 <?php 
+namespace Admin\controller;
 
-require_once '../controller/Controller.php';
+use Admin\controller\Controller;
 
 class OrdersController extends Controller {
 	//proveriti
