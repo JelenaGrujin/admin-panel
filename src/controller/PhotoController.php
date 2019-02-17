@@ -1,8 +1,7 @@
 <?php 
+namespace Admin\controller;
 
-require_once '../model/ProPhoDao.php';
-require_once '../model/ProductDao.php';
-require_once '../model/OwnersDao.php';
+use Admin\model\ProductDao;
 
 class PhotoController extends Controller {
 	
