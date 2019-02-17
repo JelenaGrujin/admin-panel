@@ -1,6 +1,14 @@
 <?php 
+namespace Admin\controller;
 
-require_once 'Controller.php';
+use Admin\controller\Controller;
+use Admin\model\DAO;
+use Admin\model\UserDao;
+use Admin\model\ProductDao;
+use Admin\model\OwnersDao;
+use Admin\model\typeDao;
+use Admin\model\EquipmentDao;
+use Admin\model\OwnDocDao;
 
 class ProductController extends Controller{
 
