@@ -21,7 +21,7 @@ class LogController extends Controller{
 		$this->user = new Login();
 	}
 	
-	public function login(){
+	public static function login(){
 		
 		$username=isset($_POST['username'])?$_POST['username']:"";
 		$password=isset($_POST['password'])?$_POST['password']:"";
