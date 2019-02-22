@@ -43,6 +43,10 @@ class Controller{
 			$this->daoowndoc = new OwnDocDao();
 			$this->daostructure = new StructureDao(); 
 		}
+	
+	public static function showView($page){
+		require_once 'view/'.$page.'.php';
+	}
  
 	    public function Send(){
 		$e_mail=isset($_POST['e_mail'])?$_POST['e_mail']:"";
