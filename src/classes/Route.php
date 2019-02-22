@@ -13,7 +13,6 @@ class Route{
             
             $function->__invoke();
         }
-        
        
     }
 }
