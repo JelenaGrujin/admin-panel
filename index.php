@@ -22,9 +22,9 @@ Route::set('home', function(){
     include 'view/homefiles/home_link.php';
 });
 
-  //  Route::set('equipment', EquipmentController::showView('login'));
+  //  Route::set('equipment', EquipmentController::showView('login')); //I set this just for example
     
        // Route::set('type', Controller::showView('login'));
         
-          //  Route::set('helo', LogController::login());
+          //  Route::set('helo', LogController::login()); 
 ?>
