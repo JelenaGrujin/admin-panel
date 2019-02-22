@@ -10,9 +10,8 @@ class Route{
         $_routes[$route]=$function;
         
         if ($route==$_GET['url']) {
-            $function=$_routes[$route];
             
-            $this->function;
+            $function->__invoke();
         }
         
        
