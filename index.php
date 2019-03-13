@@ -7,7 +7,7 @@ use Admin\controller\LogController;
 use Admin\controller\Controller;
 
 
-
+/*
 Route::set('index.php', function(){
     require_once 'view/login.php';
 });
@@ -21,10 +21,10 @@ Route::set('home', function(){
     $page_homepa = 'active';
     include 'view/homefiles/home_link.php';
 });
-
-  //  Route::set('equipment', EquipmentController::showView('login')); //I set this just for example
+*/
+ //  Route::set('equipment', EquipmentController::showView('login')); //I set this just for example
     
        // Route::set('type', Controller::showView('login'));
         
-          //  Route::set('helo', LogController::login()); 
+            Route::set('index.php', 'LogController::login()'); 
 ?>
