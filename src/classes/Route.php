@@ -11,7 +11,7 @@ class Route{
         
         if ($route==$_GET['url']) {
             
-            $function->__invoke();
+              call_user_func($function);
         }
        
     }
