@@ -11,7 +11,15 @@ class Route{
         
         if ($route==$_GET['url']) {
             
-              call_user_func($function);
+            $c=explode('::', $function);
+            $co=$c["0"];
+            $con="Admin\\controller\\$co";
+            $fun=$c['1'];
+            
+            
+            new $con;
+           
+            echo $con.'->'.$fun;
         }
        
     }
