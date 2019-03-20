@@ -22,16 +22,19 @@ class LogController extends Controller{
 	}
 	
 	public static function login(){
-		
-		$username=isset($_POST['username'])?$_POST['username']:"";
-		$password=isset($_POST['password'])?$_POST['password']:"";
-		
-		$this->user->setUsername($username);
-		$this->user->setPassword($password);
-		
-		$user=self::get_data();
-		
-	}
+        
+       		 include 'view/login.php';
+        
+        /*
+        $username=isset($_POST['username'])?$_POST['username']:"";
+        $password=isset($_POST['password'])?$_POST['password']:"";
+        
+        $this->user->setUsername($username);
+        $this->user->setPassword($password);
+        
+        $user=self::get_data();
+        */
+    }
 	
 	public function get_data(){
 		
