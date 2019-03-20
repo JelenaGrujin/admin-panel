@@ -1,30 +1,11 @@
 <?php 
 require_once 'vendor/autoload.php';
 
-use Admin\classes\Route;
-use Admin\controller\EquipmentController;
-use Admin\controller\LogController;
-use Admin\controller\Controller;
+use Admin\classes\Request;
 
 
-/*
-Route::set('index.php', function(){
-    require_once 'view/login.php';
-});
+$ruter = Admin\classes\Router::insert('Route.php');
 
-Route::set('home', function(){
-    $makemonth=date("d-m-Y", strtotime("+1 months"));
-    $makeweek=date("d-m-Y", strtotime("+1 week"));
-    $makeday=date("d-m-Y", strtotime("+1 day"));
-    $maked=date("d-m-Y", strtotime("-1 day"));
-    
-    $page_homepa = 'active';
-    include 'view/homefiles/home_link.php';
-});
-*/
- //  Route::set('equipment', EquipmentController::showView('login')); //I set this just for example
-    
-       // Route::set('type', Controller::showView('login'));
-        
-            Route::set('index.php', 'LogController::login()'); 
+$ruter->direct(Request::url(), Request::method());
+
 ?>
