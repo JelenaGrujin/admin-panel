@@ -21,11 +21,13 @@ class LogController extends Controller{
 		$this->user = new Login();
 	}
 	
-	public static function login(){
+	public function showView(){
+		
+		 include 'view/login.php';
+	}
+	
+	public function login(){
         
-       		 include 'view/login.php';
-        
-        /*
         $username=isset($_POST['username'])?$_POST['username']:"";
         $password=isset($_POST['password'])?$_POST['password']:"";
         
@@ -33,7 +35,7 @@ class LogController extends Controller{
         $this->user->setPassword($password);
         
         $user=self::get_data();
-        */
+        
     }
 	
 	public function get_data(){
