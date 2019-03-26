@@ -49,7 +49,7 @@ class Router{
         $c="Admin\\controller\\$controller";
         
         $con=new $c;
-        $con::$action();
+        $con->$action();
 
         
     }
