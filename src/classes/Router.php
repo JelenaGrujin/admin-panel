@@ -38,29 +38,19 @@ class Router{
            
         }else {
            
-            echo'ruta ne postoji';
+            echo'route does not exist';
         }
         
        
 }
 
     protected function callAction($controller, $action) {
-
         
-   
         $c="Admin\\controller\\$controller";
-    
-        $con=new $c;
         
-    //    $con->$action;
-    
-     //   $con->$action;
+        $con=new $c;
+        $con::$action();
 
-var_dump(method_exists($con, $action));
-     //   var_dump($c);
-     // var_dump($action);
-      //  $c::$action;
-       // LogController::login();
         
     }
 
