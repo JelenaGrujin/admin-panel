@@ -15,7 +15,6 @@ class LogController {
     public $session;
     public $home;
 
-    
     public function __construct(){
 
         $this->session = new Session();
@@ -48,12 +47,11 @@ class LogController {
 
     public function redirect() {
 
-        
         if ($this->session->sessionExist($this->session_name)==true){
             
             $this->home->showHome();
         }else {
-            header('Location:login.php?$msgg=morate se ulogovati');
+            header('Location:login.php?$need to log in');
             
         }
     }
