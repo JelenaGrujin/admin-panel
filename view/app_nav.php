@@ -22,6 +22,6 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto"></ul>
 		<div class="navbar-brand text-white">Logged in: <?php echo $user[0]['username']; ?></div>
-		<a class="btn bg-danger text-white font-weight-bold" href="routes.php?page=Logout">Log out</a>
+		<a class="btn bg-danger text-white font-weight-bold" href="logout">Log out</a>
 	</div>
 </nav>
