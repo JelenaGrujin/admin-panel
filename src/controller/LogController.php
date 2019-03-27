@@ -51,7 +51,7 @@ class LogController {
             
             $this->home->showHome();
         }else {
-            header('Location:login.php?$need to log in');
+            header('Location:index.php?$need to log in');
             
         }
     }
