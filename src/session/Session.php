@@ -68,7 +68,7 @@ class Session{
 		}
 		
 	}
-	
+	/*
 	public static function getInstance(){
 	    if(!self::$instance)
 	    {
@@ -76,7 +76,7 @@ class Session{
 	    }
 	   
 	    return self::$instance;
-	  }
+	  }*/
 }
 
 
