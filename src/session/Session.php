@@ -2,10 +2,7 @@
 namespace Admin\session;
 
 class Session{
-	
-	private $datainfo=array();
-	private $own_ses;
-	
+
 	public function __construct(){
 		if (!isset($_SESSION)) {
 			$this->onSession();
@@ -25,9 +22,9 @@ class Session{
 	
 	}
 
-	public function create_session($session_name, $ses_array=false){
+	public function create_session($session_name, $datainfo=false){
 		if (!isset($_SESSION[$session_name])) {
-			if ($ses_array==false) {
+			if ($datainfo==false) {
 				$_SESSION[$session_name]=array();
 			}else{
 				$_SESSION[$session_name]='';
@@ -71,7 +68,7 @@ class Session{
 		}
 		
 	}
-/*	
+	
 	public static function getInstance(){
 	    if(!self::$instance)
 	    {
@@ -79,7 +76,7 @@ class Session{
 	    }
 	   
 	    return self::$instance;
-	  }*/
+	  }
 }
 
 
