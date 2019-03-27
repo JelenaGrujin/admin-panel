@@ -16,20 +16,16 @@ class Login{
 	}
 	
 	public function setPassword($password) {
-		$this->password=$password;
+	    $salted="4f3gv4fsd354g.$password.4g56hert";
+	    $pass=hash('md5', $salted);
+		$this->password=$pass;
+	
 	}
 	
 	public function getPassword() {
 		return $this->password;
 	}
 	
-	public function salted($password){
-		
-		$salted="4f3gv4fsd354g.$password.4g56hert";		
-		$pass=hash('md5', $salted);
-		
-		return $pass;
-	}
 }
 
 
