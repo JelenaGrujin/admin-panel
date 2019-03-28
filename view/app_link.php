@@ -19,9 +19,7 @@
 	
 	if ($user) {
 ?>
-<html lang="sr">
-	<?php include 'header.php'; ?>
-	<body class="bg-white">
+
 		<?php include 'app_nav.php';?>
 		<?php include 'nav.php';?>
 		<div class="wrapper bg-faded ml-2 mr-2">
@@ -103,10 +101,3 @@
 				}
 			?>
 		</div>
-	</body>
-</html>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
