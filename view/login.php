@@ -3,9 +3,7 @@
 $msg=isset($msg)?$msg:"";
 
 ?>
-<html lang="sr">
-	<?php include 'header.php';?>
-	<body class="bg-ligth">
+
 		<div class="wrapper container bg-faded text-center w-25 mt-5">
 			<form class="" action="routes.php" method="post">
 				<h3 class="text-dark">Welcome</h3>
@@ -25,5 +23,4 @@ $msg=isset($msg)?$msg:"";
 			?>
 			</span>
 		</div>
-	</body>
-</html>
+
