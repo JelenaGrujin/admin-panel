@@ -1,20 +1,17 @@
 <?php
 namespace Admin\controller;
 
-use Admin\controller\Controller;
 use Admin\model\typeDao;
 
-class ProducTypeController extends Controller{
+class ProducTypeController{
 
 	public function __construct(){
 
-		parent:: __construct();
 		$this->daotype = new TypeDao();
 
 	}
 
 	public function showTypeProduct(){
-		
 		
 		$typeslist=$this->daotype->selectFromProductType();
 		
