@@ -5,7 +5,7 @@ $msg=isset($msg)?$msg:"";
 ?>
 
 		<div class="wrapper container bg-faded text-center w-25 mt-5">
-			<form class="" action="routes.php" method="post">
+			<form class="" action="home" method="post">
 				<h3 class="text-dark">Welcome</h3>
 				<input class="form-control mb-3" type="text" name="username" placeholder="Username">
 				<input class="form-control mb-3" type="password" name="password" placeholder="Password">
