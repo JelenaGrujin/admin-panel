@@ -9,13 +9,13 @@
 	<nav class="navbar navbar-expand-sm">
 		<ul class="navbar-nav">
 			<li class="nav-item mr-2">
-				<a  class="btn btn-outline-light <?php echo $page_home;?>" href="routes.php?page=home">HOME</a>
+				<a  class="btn btn-outline-light <?php echo $page_home;?>" href="home">HOME</a>
 			</li>
 			<li class="nav-item mr-2">
-				<a  class="btn btn-outline-light <?php echo $page_product;?>" href="routes.php?page=product">Poducts</a>
+				<a  class="btn btn-outline-light <?php echo $page_product;?>" href="product">Poducts</a>
 			</li>
 			<li class="nav-item mr-2">
-				<a  class="btn btn-outline-light <?php echo $page_pro_type;?>" href="routes.php?page=type">Base</a>
+				<a  class="btn btn-outline-light <?php echo $page_pro_type;?>" href="type">Base</a>
 			</li>
 		</ul>
 	</nav>
