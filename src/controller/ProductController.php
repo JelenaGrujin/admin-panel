@@ -10,13 +10,12 @@ use Admin\model\typeDao;
 use Admin\model\EquipmentDao;
 use Admin\model\OwnDocDao;
 
-class ProductController extends Controller{
+class ProductController{
 
 	
 	public function __construct(){
 		
-		parent::__construct();
-			$this->dao = new DAO();
+		$this->dao = new DAO();
 	     	$this->daouser = new UserDao();
 	     	$this->daoproduct = new ProductDao();
 	     	$this->daoowner = new OwnersDao();
