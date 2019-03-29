@@ -1,12 +1,3 @@
-<?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-	$page_new = isset($page_new_product)?$page_new_product:"";
-	if ($ulogovan) {
-?>
 <nav class="navbar navbar-expand-lg navbar-dark">
 	<nav class="navbar navbar-expand-sm">
 		<ul class="navbar-nav">
@@ -16,8 +7,3 @@
 	    </ul>
 	</nav>
 </nav>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
