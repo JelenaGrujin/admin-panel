@@ -1,13 +1,8 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	$id_product=isset($id_product)?$id_product:"";
 	$errors =isset($errors)?$errors:array();
-	if ($ulogovan) {	
+	
 ?>
 	<form class="form" action="routes.php" method="POST" enctype="multipart/form-data">
 	<div class="row mt-4 pb-3 bg-light text-danger border border-primary">
@@ -158,8 +153,3 @@
 	</div>
 </div>
 		</form>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
