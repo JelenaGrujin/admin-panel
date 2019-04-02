@@ -18,7 +18,7 @@ class ProducTypeController{
 		$page_basepa='active';
 		$page_type_product = 'active';
 		$container = 'container';
-		include 'basefiles/base_link.php';
+		include 'view/basefiles/base_link.php';
 		
 	}
 	
@@ -35,7 +35,7 @@ class ProducTypeController{
 		$page_basepa='active';
 		$page_type_product = 'active';
 		$container = 'container';
-		include 'basefiles/base_link.php';
+		include 'view/basefiles/base_link.php';
 		
 	}
 
