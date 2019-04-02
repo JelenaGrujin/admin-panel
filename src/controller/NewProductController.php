@@ -120,7 +120,7 @@ class newProductController extends Controller{
 		$page_new_product='active';
 		$page_info='active';
 		$page_productpa='active';
-		include 'productfiles/new_pro_link.php';
+		include 'view/productfiles/new_pro_link.php';
 		
 		
 	}
