@@ -1,10 +1,4 @@
 <?php
-if(!isset($_SESSION['user'])){
-	session_start();
-
-}
-
-$user=unserialize($_SESSION['user']);
 $msg=isset($msg)?$msg:"";
 
 $page_pro_type = isset($page_type_product)?$page_type_product:"";
@@ -25,13 +19,8 @@ $page_kartage = isset($page_kartica_agenta)?$page_kartica_agenta:"";
 $page_azuage = isset($page_azuriraj_agenta)?$page_azuriraj_agenta:"";
 $cont = isset($container)?$container:"";
 
-if ($user){
-
 ?>
-<html lang="sr">
-	<?php include 'header.php'; ?>
-	<body class="bg-light">
-		<?php include 'app_nav.php';?>
+	<?php include 'app_nav.php';?>
 		<div class="wrapper bg-faded ml-3 mr-3">
 			<?php include 'base_nav.php';?>
 			<span class="text-dark">
@@ -73,10 +62,3 @@ if ($user){
 				</div>
 			</div>
 		<?php include 'footer.php';?>
-	</body>
-</html>
-
-<?php }else {
-	header('Location:login.php?msgg=You need to log in');
-	
-}?>
