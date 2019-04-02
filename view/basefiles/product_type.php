@@ -1,12 +1,3 @@
-<?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-
-	$user=unserialize($_SESSION['user']);
-
-	if ($user) {
-?>
 <h4 class="display-5 text-secondary mt-4 text-center">View products type</h4>
 <form action="routes.php" method="post">
 	<div class="row justify-content-center text-dark mt-3">	
@@ -46,8 +37,3 @@
 		</div>
 	</div>
 </form>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
