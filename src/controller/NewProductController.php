@@ -267,7 +267,7 @@ class newProductController extends Controller{
 		$page_productpa='active';
 		$page_owner='active';
 		$page_corporate = 'active';
-		include 'productfiles/new_pro_link.php';
+		include 'view/productfiles/new_pro_link.php';
 	}
 	
 	public function showPersonal() {
@@ -278,7 +278,7 @@ class newProductController extends Controller{
 		$page_productpa='active';
 		$page_owner='active';
 		$page_personal = 'active';
-		include 'productfiles/new_pro_link.php';
+		include 'view/productfiles/new_pro_link.php';
 	}
 		
 	public function confirmOwner(){
@@ -432,7 +432,7 @@ class newProductController extends Controller{
 				$page_new_product='active';
 				$page_productpa='active';
 				$page_photos='active';
-				include 'productfiles/new_pro_link.php';
+				include 'view/productfiles/new_pro_link.php';
 			}
 		}
 		
