@@ -256,7 +256,7 @@ class newProductController extends Controller{
 		$page_new_product='active';
 		$page_productpa='active';
 		$page_owner='active';
-		include 'productfiles/new_pro_link.php';
+		include 'view/productfiles/new_pro_link.php';
 	
 	}
 	
