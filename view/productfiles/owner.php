@@ -1,16 +1,8 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	
 	$page_cor = isset($page_corporate)?$page_corporate:"";
-	$page_per = isset($page_personal)?$page_personal:"";
-	
-	if ($user) {
-		
+	$page_per = isset($page_personal)?$page_personal:"";		
 ?>	
 
 	<div class="row text-white">
@@ -19,10 +11,10 @@
 				<span class="text-primary mb-2"><strong>Owner type:</strong></span>
 				<ul class="navbar-nav text-white">
 					<li class="nav-item mb-2">
-						<a href="routes.php?page=corporate" class="btn btn-outline-primary <?php echo $page_prav;?>">corporate</a>
+						<a href="corporate" class="btn btn-outline-primary <?php echo $page_cor;?>">corporate</a>
 					</li>
 					<li class="nav-item">
-						<a href="routes.php?page=personal" class="btn btn-outline-primary <?php echo $page_fizi;?>">personal</a>
+						<a href="personal" class="btn btn-outline-primary <?php echo $page_per;?>">personal</a>
 					</li>
 				</ul>
 			</div>			
@@ -42,12 +34,3 @@
 				?>
 			</div>
 		</div>
-
-
-		<?php include 'footer.php';?>
-
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>
