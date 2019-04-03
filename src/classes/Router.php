@@ -4,8 +4,7 @@ namespace Admin\classes;
 use Admin\controller\LogController;
 
 class Router{
-    
-
+   
     public $routes = [
         
         'GET'=>[],
@@ -16,7 +15,7 @@ class Router{
         
         $ruter = new self();
         
-        require_once 'src/classes/'.$file;
+        require_once $file;
         return $ruter;
     }
     
@@ -32,16 +31,13 @@ class Router{
 
         if (array_key_exists($url, $this->routes[$method])){
             
-     
             $this->callAction(...explode('::', $this->routes[$method][$url]));
-           
            
         }else {
            
             echo'route does not exist';
         }
         
-       
 }
 
     protected function callAction($controller, $action) {
@@ -50,10 +46,7 @@ class Router{
         
         $con=new $c;
         $con->$action();
-
-        
     }
 
 }
 ?>
-  
