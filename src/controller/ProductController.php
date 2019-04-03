@@ -32,7 +32,7 @@ class ProductController{
 
 		$page_productpa='active';
 		$page_list_productpa='active';	
-		include 'app_link.php';		
+		include 'view/app_link.php';		
 	}
 	
 	public function showSendOffer(){
@@ -54,7 +54,7 @@ class ProductController{
 			
 			$page_productpa='active';
 			$page_list_productpa='active';	
-			include 'app_link.php';	
+			include 'view/app_link.php';	
 				
 		}
 		
@@ -67,7 +67,7 @@ class ProductController{
 		$product=$this->daoproduct->selectFromProductById($id_product);
 		$page_productpa='active';
 		$page_product_card='active';
-		include 'app_link.php';
+		include 'view/app_link.php';
 	}
 	
 	public function showEditCard(){
@@ -78,7 +78,7 @@ class ProductController{
 		
 		$page_productpa='active';
 		$page_edit_card = 'active';
-		include 'app_link.php';
+		include 'view/app_link.php';
 		
 	}
 	
@@ -246,7 +246,7 @@ class ProductController{
 		
 			$page_productpa='active';
 			$page_edit_card = 'active';
-			include 'app_link.php';
+			include 'view/app_link.php';
 		}
 			
 	}
