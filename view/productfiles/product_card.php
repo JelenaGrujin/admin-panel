@@ -1,14 +1,4 @@
-<?php
-	if(!isset($_SESSION['user'])){
-		session_start();
-	
-	}
-	
-	$user=unserialize($_SESSION['user']);
-	
-	if ($user){
-
-		$msg=isset($msg)?$msg:"";
+<?php$msg=isset($msg)?$msg:"";
 		
 		foreach ($product as $pom){?>
 		<div class="col bg-white text-white mb-2">
@@ -192,8 +182,4 @@
 			</div>	
 		</div>
 <?php }
-
-}else {
-	header('Location:../login.php?msgg=You need to log in');
-	
-}?>
+?>

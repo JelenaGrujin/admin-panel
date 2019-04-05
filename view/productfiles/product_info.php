@@ -1,14 +1,5 @@
 
 <?php
-	if(!isset($_SESSION['user'])){
-		session_start();
-		
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-
-
-	if ($ulogovan){
 
 	$msg=isset($msg)?$msg:"";
 	$errors =isset($errors)?$errors:array();
@@ -366,7 +357,3 @@
 		</div>
 	</div>
 </form>
-<?php }else {
-	header('Location:login.php?msgg=You need to log in');
-	
-}?>

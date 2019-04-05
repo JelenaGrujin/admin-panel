@@ -1,26 +1,24 @@
 <?php 
 namespace Admin\controller;
 
-use Admin\controller\Controller;
 use Admin\model\ProductDao;
 use Admin\model\OwnersDao;
 use Admin\model\ProPhoDao;
 
-class HomeController extends Controller{
+class HomeController{
 	
 	public function __construct(){
 		
-		parent::__construct();
-		$this->daoproduct = new ProductDao();
-	    $this->daoowner = new OwnersDao();
 	    $this->daopropho = new ProPhoDao();
 		
 	}
 	
-	public function showHome() {
+	public static  function showHome() {
+	    $daoproduct = new ProductDao();
+		$productlist=$daoproduct->selectFromProducts();
 		
-		$productlist=$this->daoproduct->selectFromProducts();
-		$ownerlist=$this->daoowner->selectFromOwners();
+		$daoowner = new OwnersDao();
+		$ownerlist=$daoowner->selectFromOwners();
 		
 		$makemonth=date("d-m-Y", strtotime("+1 months")); 
 		$makeweek=date("d-m-Y", strtotime("+1 week")); 
@@ -28,7 +26,7 @@ class HomeController extends Controller{
 		$maked=date("d-m-Y", strtotime("-1 day"));
 
 		$page_homepa = 'active';
-		include 'homefiles/home_link.php';
+		include 'view/homefiles/home_link.php';
 	}
 	
 	public function klikPro(){

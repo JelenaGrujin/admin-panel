@@ -1,11 +1,5 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$agent=isset($agent)?$agent:array();
-	if ($ulogovan) {
 
 ?>
 <form action="routes.php" method="post">
@@ -53,8 +47,3 @@
 
 <?php }?>
 </form>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

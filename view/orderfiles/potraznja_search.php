@@ -1,12 +1,3 @@
-<?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	if ($user) {
-
-		$nadjeno=isset($nadjeno)?$nadjeno:array();
-?>
 <form class="form" action="routes.php" method="POST">
 <div class="row text-primary bg-white mt-2 border-top-0">
 
@@ -50,8 +41,4 @@
  	</div>
 </div>
 </form>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>
+

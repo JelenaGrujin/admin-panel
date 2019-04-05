@@ -1,13 +1,7 @@
 <?php
-	if(!isset($_SESSION['user'])){
-		session_start();
-	
-	}
-	
-	$user=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	$product=isset($product)?$product:"";
-	if ($user){
+
 
 ?>
 <?php foreach ($owner as $pom){?>
@@ -217,9 +211,3 @@
 </div>
 
 <?php }?>
-
-<?php }else {
-	
-	header('Location:login.php?msgg=You need to log in');
-	
-}?>

@@ -1,19 +1,7 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
-	
-			
-
-
-	if ($user) {
-		
 	$photos=isset($photos)?$photos:array();
-		$id_product=isset($id_product)?$id_product:"";
- 	
-	include 'head.php';?>
+	$id_product=isset($id_product)?$id_product:"";
+?>
 <div class="">
 <div class="col-2 p-2 m-2">
 <a class="btn btn-outline-primary form-control mt-2 pt-2 pb-2 text-center" href="routes.php?page=editphotos&id_pro=<?php echo $id_product;?>">Edit photos</a>
@@ -39,8 +27,3 @@
   </a>
 </div>
 </div>
-<?php 
-		} else {
-		  header('Location:login.php?msgg=You need to log in');
-	}
-?>

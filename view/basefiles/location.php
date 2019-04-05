@@ -1,18 +1,10 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-	
 	$page_loc_1 = isset($page_location_1)?$page_location_1:"";
 	$page_loc_2 = isset($page_location_2)?$page_location_2:"";
 	$page_loc_3 = isset($page_location_3)?$page_location_3:"";
 	
-	if ($ulogovan) {
 ?>
 	<div class="row container-fluid text-white">
-		<!-- Prvi stubac -->
 		<div class="col-3 mt-4">
 			<div class="btn-group-vertical btn-block">
 				<ul class="navbar-nav text-info w-100">
@@ -47,8 +39,3 @@
 			?>
 		</div>
 	</div>			
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>

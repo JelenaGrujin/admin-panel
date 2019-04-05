@@ -1,18 +1,10 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
-	
-	if ($user) {
-		
 		$docs=isset($docs)?$docs:array();
 		$id_owner=isset($id_owner)?$id_owner:"";
 		$errors =isset($errors)?$errors:array();
  		$broj=0;
 		$ukupanbroj=count($docs);
-	include 'head.php';?>
+?>
 <table class="table">
   <thead>
     <tr>
@@ -46,8 +38,3 @@
 		</div>	
 	</div>
 </form>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>

@@ -1,18 +1,10 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
-	
 	$page_pro_type = isset($page_type_product)?$page_type_product:"";
 	
 	$page_equi = isset($page_equipment)?$page_equipment:"";
 
 	$page_str = isset($page_structure)?$page_structure:"";
 	
-	
-	if ($user) {
 ?>
 	<div class="row container-fluid text-white">
 		<div class="col-3 mt-4">
@@ -49,8 +41,3 @@
 			?>
 		</div>
 	</div>			
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>

@@ -1,12 +1,4 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-	
-	if ($ulogovan) {
-		
 		$id_potraznje=isset($id_potraznje)?$id_potraznje:"";
 		$nekretnine=isset($nekretnine)?$nekretnine:array();
 		$errors=isset($errors)?$errors:array();
@@ -76,8 +68,3 @@
 </div>    
 	</form>
 </div>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

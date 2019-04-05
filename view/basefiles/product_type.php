@@ -10,13 +10,13 @@
 	</div>
 		
 	<div class="row justify-content-center text-white mt-1">
-		<?php foreach ($typeslist as $pom){?>	
+		<?php //foreach ($typeslist as $pom){?>	
 		<div class="col-6 col-sm-5 text-left text-info mb-2 pt-1 border-bottom">
-			<span><?php echo $pom['name_pro_type'];?></span>
+			<span><?php //echo $pom['name_pro_type'];?></span>
 		</div>
 		<div class="col-6 col-sm-3 text-center mb-2 border-bottom">
 		</div>
-		<?php  } ?>
+		<?php  //} ?>
 	</div>
 		
 	<div class="row justify-content-center text-dark mt-2">	

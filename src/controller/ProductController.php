@@ -1,7 +1,6 @@
 <?php 
 namespace Admin\controller;
 
-use Admin\controller\Controller;
 use Admin\model\DAO;
 use Admin\model\UserDao;
 use Admin\model\ProductDao;
@@ -15,20 +14,19 @@ class ProductController{
 	
 	public function __construct(){
 		
-		$this->dao = new DAO();
+			$this->dao = new DAO();
 	     	$this->daouser = new UserDao();
 	     	$this->daoproduct = new ProductDao();
 	     	$this->daoowner = new OwnersDao();
 	     	$this->daotype = new TypeDao();
 	     	$this->daoequipment = new EquipmentDao();
 	     	$this->daoowndoc = new OwnDocDao();
-	     	$this->daoowndoc = new OwnDocDao(); 
 	}
 	
 	public function showProduct(){
 		
-		$productlist=$this->daoproduct->selectFromProducts();
-		$ownerlist=$this->daoowner->selectFromOwners();
+		//$productlist=$this->daoproduct->selectFromProducts();
+		//$ownerlist=$this->daoowner->selectFromOwners();
 
 		$page_productpa='active';
 		$page_list_productpa='active';	
@@ -54,7 +52,7 @@ class ProductController{
 			
 			$page_productpa='active';
 			$page_list_productpa='active';	
-			include 'view/app_link.php';	
+			include 'app_link.php';	
 				
 		}
 		
@@ -67,7 +65,7 @@ class ProductController{
 		$product=$this->daoproduct->selectFromProductById($id_product);
 		$page_productpa='active';
 		$page_product_card='active';
-		include 'view/app_link.php';
+		include 'app_link.php';
 	}
 	
 	public function showEditCard(){
@@ -78,7 +76,7 @@ class ProductController{
 		
 		$page_productpa='active';
 		$page_edit_card = 'active';
-		include 'view/app_link.php';
+		include 'app_link.php';
 		
 	}
 	
@@ -246,7 +244,7 @@ class ProductController{
 		
 			$page_productpa='active';
 			$page_edit_card = 'active';
-			include 'view/app_link.php';
+			include 'app_link.php';
 		}
 			
 	}

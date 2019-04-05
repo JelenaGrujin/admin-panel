@@ -6,8 +6,8 @@
 
 ?>
 
-	<?php include 'view/app_nav.php';?>
-	<?php include 'view//nav.php';?>
+		<?php include 'view/app_nav.php';?>
+		<?php include 'view//nav.php';?>
 		<div class="wrapper bg-faded ml-3 mr-3">
 		
 			<?php include 'new_pro_nav.php';?>
@@ -33,4 +33,3 @@
 				
 			</div>
 		</div>
-		<?php include 'footer.php';?>

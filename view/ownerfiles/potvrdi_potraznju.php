@@ -1,17 +1,10 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	$errors =isset($errors)?$errors:array();
 	$tip_nek_p = isset($tip_nek_p)?$tip_nek_p:array();
 	$dod_p = isset($dod_p)?$dod_p:array();
 	$gar_p = isset($gar_p)?$gar_p:array();
 	$prov_p = isset($prov_p)?$prov_p:array();
-	
-	if ($ulogovan) {
 
 ?>
 
@@ -172,8 +165,3 @@
 	</div>
 	</form>
 </div>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

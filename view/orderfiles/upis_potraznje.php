@@ -1,12 +1,6 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	$listanek = isset($listanek)?$listanek:array();
-	if ($ulogovan) {
 ?>
 
 <form class="form" action="routes.php" method="POST">
@@ -26,10 +20,3 @@
 			<button class="btn btn-info btn-block pt-1 pb-2" type="submit" name="page" value="posalji"><strong>Potvrdi</strong></button>	
 		</div>
 </form>
-
-
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

@@ -1,12 +1,6 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
 	$id_updated=isset($id_updated)?$id_updated:"";
-	$productlist=isset($pretrazeno)?$pretrazeno:$productlist;
-	if ($user) {
+
 ?>
 
 <div class="container-fluid">
@@ -69,8 +63,3 @@ $(document).ready(function() {
 </script>
 </form>	
 </div>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>

@@ -1,5 +1,4 @@
 <?php
-
 	$msg=isset($msg)?$msg:"";
 	$page_inf = isset($page_info)?$page_info:"";
 	$page_own = isset($page_owner)?$page_owner:"";

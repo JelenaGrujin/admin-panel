@@ -1,26 +1,27 @@
 <?php
 namespace Admin\controller;
 
-use Admin\controller\Controller;
 use Admin\model\EquipmentDao;
 
-class EquipmentController extends Controller{
+class EquipmentController{
 
+    public $daoequipment;
+    
 	public function __construct(){
-		parent::__construct();
-		$this->daoequipment = new EquipmentDao();
+		
 
 	}
 
 	public function showEquipment() {
-		
-		
-		$equilist=$this->daoequipment->selectFromEquipment();
+	    
+	    $daoequipment = new EquipmentDao();
+	   
+	    $equilist=$daoequipment->selectFromEquipment();
 		
 		$page_basepa='active';
 		$page_equipment = 'active';
 		$container = 'container';
-		include 'basefiles/base_link.php';
+		include 'view/basefiles/base_link.php';
 	}
 	
 	public function newEquipment(){

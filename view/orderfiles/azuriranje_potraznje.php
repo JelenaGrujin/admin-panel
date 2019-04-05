@@ -1,13 +1,6 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
-	$errors =isset($errors)?$errors:array();	
-	if ($ulogovan) {
-
+	$errors =isset($errors)?$errors:array();
 ?>
 
 <?php foreach ($listapotraznji as $pom){?>
@@ -226,8 +219,3 @@
 	</div>
 </form>
 <?php }?>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

@@ -15,6 +15,7 @@ class LogController {
     public $session;
     public $home;
 
+    
     public function __construct(){
 
         $this->session = new Session();
@@ -35,14 +36,14 @@ class LogController {
         $this->user->setPassword($_POST['password']?$_POST['password']:"");
         
         $user=$this->daouser->selectUserByUsernameAndPassword($this->user->getUsername(), $this->user->getPassword());
-        
+       
         if (!empty($user)){
-            
-            $this->session->create_session($this->session_name);
-            $this->session->serializeSession($this->session_name, $user);
-        }
+           
+          $this->session->create_session($this->session_name);
+          $this->session->serializeSession($this->session_name, $user);
         
-        self::redirect();
+        }
+          self::redirect();
     }
 
     public function redirect() {
@@ -51,7 +52,7 @@ class LogController {
             
             $this->home->showHome();
         }else {
-            header('Location:index.php?$need to log in');
+            header('Location:index.php?$msgg=need to login');
             
         }
     }
@@ -59,7 +60,7 @@ class LogController {
     public function logout(){
         session_unset();
         session_destroy();
-        header('Location:login.php');
+        header('Location:index.php');
         
     }
     

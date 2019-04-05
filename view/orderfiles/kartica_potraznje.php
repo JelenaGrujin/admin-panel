@@ -1,12 +1,6 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	$listapotraznji=isset($listapotraznji)?$listapotraznji:array();
-	if ($ulogovan) {
 
 ?>
 
@@ -156,8 +150,3 @@
 </div>
 
 <?php }?>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

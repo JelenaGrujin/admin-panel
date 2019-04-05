@@ -1,23 +1,12 @@
-
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-	
 	$page_age_baza = isset($page_agent_baza)?$page_agent_baza:"";
 	$page_upiage = isset($page_upisagenta)?$page_upisagenta:"";
 	$page_listage = isset($page_listaagenta)?$page_listaagenta:"";
 	$page_kartage = isset($page_kartica_agenta)?$page_kartica_agenta:"";
 	$page_azuage = isset($page_azuriraj_agenta)?$page_azuriraj_agenta:"";
-	
-	if ($ulogovan) {
+
 ?>
-<!-- <form class="form" action="routes.php" method="POST"> -->
-<!-- obavezna polja -->
 	<div class="row container-fluid ml-1">
-		<!-- Prvi stubac -->
 		<div class="col-2 mt-4">
 			<div class="btn-group-vertical btn-block">
 				<ul class="navbar-nav text-info w-100">
@@ -30,8 +19,6 @@
 				</ul>
 			</div>			
 		</div>
-		<!-- Kraj prvog stupca -->
-		<!-- Drugi stubac -->
 		<div class="col mt-2">
 			<?php 
 			if (empty($page_upiage)) {
@@ -54,12 +41,4 @@
 				
 			?>
 		</div>
-		<!-- Kraj drugog stupca -->
-		<!-- Treci stubac -->
-	</div>			
-<!-- </form> -->
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>
+	</div>		

@@ -1,10 +1,3 @@
-<?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	if ($ulogovan) {
-?>
 <h4 class="display-5 text-secondary mt-4">Lista agenata</h4>
 <form action="routes.php" method="post">
 	<table class="table table-striped border table-sm table-hover table-light small">
@@ -36,8 +29,3 @@
 		</tbody>
 	</table>
 </form>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

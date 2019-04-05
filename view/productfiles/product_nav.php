@@ -4,7 +4,6 @@
 	$page_edi_pho = isset($page_edit_photo)?$page_edit_photo:"";
 	$page_own = isset($page_owners)?$page_owners:"";
 	$page_own_doc = isset($page_owners_doc)?$page_owners_doc:"";
-
 ?>
 <div class="text-center border-0">
 	<div class="card-header pl-2">

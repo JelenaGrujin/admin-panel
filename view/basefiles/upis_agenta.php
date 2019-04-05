@@ -1,11 +1,4 @@
-<?php
-//	if(!isset($_SESSION['user'])) {
-	//	session_start();
-	//}
-	
-	//if ($ulogovan) {
-
-		$errors=isset($errors)?$errors:array();
+<?php	$errors=isset($errors)?$errors:array();
 ?>
 <h4 class="display-5 text-secondary mt-4">upisa Agenata</h4>
 <form action="routes.php" method="post">
@@ -60,8 +53,3 @@
 		
 	
 </form>
-<?php 
-//	} else {
-//		header('Location:login.php?msgg=Morate se ulogovti');
-//	}
-?>

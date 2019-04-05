@@ -1,13 +1,7 @@
 <?php
-	if(!isset($_SESSION['user'])){
-		session_start();
-	
-	}
-	
-	$user=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	$errors =isset($errors)?$errors:array();
-	if ($user){
+
 
 ?>
 
@@ -201,9 +195,3 @@
 	</div>
 	<?php }?>
 </form>
-
-<?php } else {
-	
-	header('Location:login.php?msgg=You need to log in');
-	
-}?>

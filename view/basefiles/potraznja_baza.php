@@ -1,13 +1,6 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-	
 	$page_reali_baza = isset($page_realizacija_baza)?$page_realizacija_baza:"";
 	
-	if ($ulogovan) {
 ?>
 	<div class="row container-fluid ml-1">
 		<div class="col-3 mt-4">
@@ -30,8 +23,3 @@
 			?>
 		</div>
 	</div>			
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

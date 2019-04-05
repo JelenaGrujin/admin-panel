@@ -1,12 +1,6 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
-	
-	if ($ulogovan) {
+
 ?>
 
 <form class="form" action="routes.php" method="POST" enctype="multipart/form-data">
@@ -44,10 +38,3 @@
 	</div>
 	<?php }?>
 </form>
-
-
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

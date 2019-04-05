@@ -1,9 +1,4 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$user=unserialize($_SESSION['user']);
 	$msg=isset($msg)?$msg:"";
 	$page_pro_type = isset($page_type_product)?$page_type_product:"";
 	$page_loc = isset($page_location)?$page_location:"";
@@ -11,9 +6,7 @@
 	$page_age_baza = isset($page_agent_baza)?$page_agent_baza:"";
 	
 	
-	if ($user) {
 ?>
-
 <div class="text-center border-0">
 	<div class="card-header pl-2">
 		<ul class="nav nav-tabs card-header-tabs">
@@ -32,8 +25,3 @@
 		</ul>
 	</div>
 </div>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-?>

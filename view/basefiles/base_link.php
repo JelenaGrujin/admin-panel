@@ -1,4 +1,5 @@
 <?php
+
 $msg=isset($msg)?$msg:"";
 
 $page_pro_type = isset($page_type_product)?$page_type_product:"";
@@ -9,7 +10,6 @@ $page_loc_1 = isset($page_location_1)?$page_location_1:"";
 $page_loc_2 = isset($page_location_2)?$page_location_2:"";
 $page_loc_3 = isset($page_location_3)?$page_location_3:"";
 
-
 $page_pot_baza = isset($page_potraznja_baza)?$page_potraznja_baza:"";
 
 $page_age_baza = isset($page_agent_baza)?$page_agent_baza:"";
@@ -19,8 +19,9 @@ $page_kartage = isset($page_kartica_agenta)?$page_kartica_agenta:"";
 $page_azuage = isset($page_azuriraj_agenta)?$page_azuriraj_agenta:"";
 $cont = isset($container)?$container:"";
 
+
 ?>
-	<?php include 'app_nav.php';?>
+		<?php include 'view/app_nav.php';?>
 		<div class="wrapper bg-faded ml-3 mr-3">
 			<?php include 'base_nav.php';?>
 			<span class="text-dark">
@@ -60,5 +61,4 @@ $cont = isset($container)?$container:"";
 						</div>
 					</div>
 				</div>
-			</div>
-		<?php include 'footer.php';?>
+		</div>

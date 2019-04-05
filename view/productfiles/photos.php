@@ -1,12 +1,7 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
 	$id_p=isset($id_p)?$id_p:"";
 	$errors =isset($errors)?$errors:array();
-	if ($ulogovan) {
+
 		
 ?>
 <form class="form" action="routes.php" method="POST" enctype="multipart/form-data" id="js-upload-form">
@@ -22,9 +17,3 @@
 			</div>
 	</div>
 </form>
-<?php 
-	} else {
-		header('Location:login.php?msgg=You need to log in');
-	}
-	
-?>

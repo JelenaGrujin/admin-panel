@@ -1,12 +1,5 @@
 <?php
-	if(!isset($_SESSION['user'])) {
-		session_start();
-	}
-	
-	$ulogovan=unserialize($_SESSION['user']);
-	
-	if ($ulogovan) {
-		
+
 		$listapotraznja=isset($nadjeno)?$nadjeno:$listapotraznja;
 		//proveriti brisanje potraznje... 
 ?>
@@ -78,8 +71,3 @@ $(document).ready(function(){
 </script>
 	</form>
 </div>
-<?php 
-	} else {
-		header('Location:login.php?msgg=Morate se ulogovti');
-	}
-?>

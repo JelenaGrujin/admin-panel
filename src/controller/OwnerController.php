@@ -1,13 +1,14 @@
 <?php 
 namespace Admin\controller;
 
+use Admin\controller\Controller;
 use Admin\model\UserDao;
 use Admin\model\ProductDao;
 use Admin\model\OwnersDao;
 use Admin\model\OwnDocDao;
 use Admin\model\ProPhoDao;
 
-class OwnerController{
+class OwnerController {
 
 		public function __construct() {
 	     	$this->daouser = new UserDao();
@@ -18,6 +19,7 @@ class OwnerController{
 	     }
 
 	public function showOwners(){
+		
 		
 		$ownerslist=$this->daoown->selectFromOwners();
 		
@@ -66,7 +68,7 @@ class OwnerController{
 			
 			$page_productpa='active';		
 			$page_klijenti='active';
-			include 'view/app_link.php';
+			include 'app_link.php';
 		}
 		
 	}

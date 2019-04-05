@@ -1,9 +1,6 @@
 <?php 
 namespace Admin\controller;
 
-use Admin\controller\Controller;
-use Admin\controller\ownerController;
-use Admin\controller\ProducTypeController;
 use Admin\model\DAO;
 use Admin\model\typeDao;
 use Admin\model\EquipmentDao;
@@ -23,19 +20,19 @@ class newProductController{
 	private $session_name='product';
 	
 	public function __construct() {
-	     	$this->dao = new DAO();
-	     	$this->daotype = new TypeDao();
-	     	$this->daoequipment = new EquipmentDao();
-	     	$this->daolone = new LocationOneDao();
-	     	$this->daoltwo = new LocationTwoDao();
-	     	$this->daolthree = new LocationThreeDao();
+	    $this->dao = new DAO();
+	    $this->daotype = new TypeDao();
+	    $this->daoequipment = new EquipmentDao();
+	    $this->daolone = new LocationOneDao();
+	    $this->daoltwo = new LocationTwoDao();
+	    $this->daolthree = new LocationThreeDao();
 		$this->daopro = new ProductDao();     
 		$this->daoown = new OwnersDao();
 		$this->daouser = new UserDao();
 		$this->daopropho = new ProPhoDao();
 		$this->daostructure = new StructureDao(); 
 		$this->owncon = new ownerController();
-		$this->protyco = new ProducTypeController();
+		$this->protyco = new ProductTypeController();
 		$this->sesia = new Session();
 	}
 	
@@ -314,7 +311,7 @@ class newProductController{
 			$page_new_product='active';
 			$page_productpa='active';
 			$page_photos='active';
-			include 'productfiles/new_pro_link.php';
+			include 'view/productfiles/new_pro_link.php';
 	    }else{
 		 	$msg='something is wrong';
 	
@@ -326,7 +323,7 @@ class newProductController{
 			$page_new_product='active';
 			$page_info='active';
 			$page_productpa='active';
-			include 'productfiles/new_pro_link.php';
+			include 'view/productfiles/new_pro_link.php';
 			}
 				}else {
 					
@@ -339,7 +336,7 @@ class newProductController{
 						$page_productpa='active';
 						$page_owner='active';
 						$page_corporate = 'active';
-						include 'productfiles/new_pro_link.php';
+						include 'view/productfiles/new_pro_link.php';
 					}else {
 						
 						$agentlist=$this->daouser->selectFromUsers();
@@ -348,7 +345,7 @@ class newProductController{
 						$page_productpa='active';
 						$page_owner='active';
 						$page_personal = 'active';
-						include 'productfiles/new_pro_link.php';
+						include 'view/productfiles/new_pro_link.php';
 					}
 				}
 	}
@@ -411,7 +408,7 @@ class newProductController{
 				$productlist=$this->daopro->selectFromProducts();
 				$page_productpa='active';
 				$page_list_productpa='active';	
-				include 'app_link.php';	
+				include '../app_link.php';	
 			}
 			
 		}else {

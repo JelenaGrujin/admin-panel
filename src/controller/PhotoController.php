@@ -2,6 +2,8 @@
 namespace Admin\controller;
 
 use Admin\model\ProductDao;
+use Admin\model\OwnersDao;
+use Admin\model\ProPhoDao;
 
 class PhotoController extends Controller {
 	
@@ -32,8 +34,6 @@ class PhotoController extends Controller {
 	
 	public function showEditPhotos(){
 		$id_product=isset($_GET['id_pro'])?$_GET['id_pro']:"";
-		
-		$dao = new DAO();
 		
 		$photos = $this->daopropho->selectFromProductsPhoto($id_product);
 
