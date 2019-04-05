@@ -4,8 +4,9 @@
 	$page_home = isset($page_homepa)?$page_homepa:"";
 	$page_birth_view = isset($page_birthday_view)?$page_birthday_view:"";
 ?>
-		<?php include '../app_nav.php';?>
-			<?php include '../nav.php';?>
+
+		<?php include 'view/app_nav.php';?>
+			<?php include 'view/nav.php';?>
 			<div class="wrapper bg-faded ml-2 mr-2">
 			<span class="text-dark">
 			<?php 

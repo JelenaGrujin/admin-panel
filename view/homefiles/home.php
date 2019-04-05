@@ -3,6 +3,7 @@
 	$kukipro=isset($_COOKIE['kukit'])?$_COOKIE['kukit']:"";
 	$kukiown=isset($_COOKIE['kukio'])?$_COOKIE['kukio']:"";
 ?>
+	
 <div class="">
 		<div class="row wrapper bg-faded ml-3 mr-3">
 			<div class="col-3 bg-white mr-1">
