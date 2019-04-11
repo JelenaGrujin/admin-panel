@@ -3,7 +3,7 @@ namespace Admin\controller;
 
 use Admin\controller\Controller;
 
-class OrdersController extends Controller {
+class Orders extends Controller {
 	//proveriti
 	public function __construct(){
 		

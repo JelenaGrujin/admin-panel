@@ -12,9 +12,9 @@ use Admin\model\OwnersDao;
 use Admin\model\UserDao;
 use Admin\model\ProPhoDao;
 use Admin\model\StructureDao;
-use Admin\session\Session;
+use Admin\classes\Session;
 
-class newProductController{	
+class NewProduct{
 	
 	public $datainfo=array('id_euro', 'location_data_1', 'location_data_2', 'location_data_3', 'addres_location', 'adres_num', 'number', 'object', 'flors', 'of_flors', 'price', 'min_price', 'deposit', 'commission', 'payment', 'square', 'surface_area', 'equipment', 'celing_height', 'structure', 'heating', 'carpentry', 'kitchen', 'num_rooms', 'num_bath', 'num_wc', 'num_terrace', 'level', 'salon_m', 'security', 'num_elevator', 'construc_year', 'num_air_con', 'num_garages', 'note', 'description', 'active', 'active_data', 'info', 'electricity', 'network', 'maintenance', 'accessories', 'garage', 'provider', 'type_terrace', 'type_bath', 'product_type', 'business_status');
 	private $session_name='product';
@@ -31,13 +31,15 @@ class newProductController{
 		$this->daouser = new UserDao();
 		$this->daopropho = new ProPhoDao();
 		$this->daostructure = new StructureDao(); 
-		$this->owncon = new ownerController();
-		$this->protyco = new ProductTypeController();
-		$this->sesia = new Session();
+		$this->owncon = new Owner();
+		$this->protyco = new ProductType();
+		$this->session = new Session();
 	}
 	
 	public function showInfo(){
-		
+		$con= new Controller();
+		$con->redirect();
+
 		$id_owner=isset($_GET['id_owner'])?$_GET['id_owner']:"";
 		
 		$typeslist=$this->daotype->selectFromProductType();
@@ -47,8 +49,8 @@ class newProductController{
 		$listlocation3=$this->daolthree->selectFromLocation3();
 		$strlist=$this->daostructure->selectFromStructure();
  
-		if ($this->sesia->sessionExist($this->session_name)==true){
-			$k=$this->sesia->getSessionData($this->session_name);
+		if ($this->session->sessionExist($this->session_name)==true){
+			$k=$this->session->getSessionData($this->session_name);
 			
 			foreach ($k as $key=>$dinfo) {
 			    $id_euro=$dinfo['id_euro'];
@@ -125,8 +127,8 @@ class newProductController{
 		if ($id_owner==NULL) {
 		$datainfo=array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
 			if ($datainfo){
-				$this->sesia->create_session($this->session_name);
-				$this->sesia->fillSession($this->session_name, $datainfo);
+				$this->session->create_session($this->session_name);
+				$this->session->fillSession($this->session_name, $datainfo);
 				$msg='successfully';
 				self::showOwner();
 			}else {
@@ -216,13 +218,13 @@ class newProductController{
 	
 	public function pause(){
 		
-		if ($this->sesia->sessionExist($this->session_name)==true){
-			$this->sesia->offSession($this->session_name);
+		if ($this->session->sessionExist($this->session_name)==true){
+			$this->session->offSession($this->session_name);
 		}
 		$productinfo=self::getData();
 		
-			$this->sesia->create_session($this->session_name);
-			$this->sesia->fillSession($this->session_name, $productinfo);
+			$this->session->create_session($this->session_name);
+			$this->session->fillSession($this->session_name, $productinfo);
 			
 		//if (--){
 			$this->protyco->showTypeProduct();

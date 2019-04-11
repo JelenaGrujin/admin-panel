@@ -4,7 +4,7 @@ namespace Admin\controller;
 use Admin\controller\Controller;
 use Admin\model\StructureDao;
 
-class StructureController extends Controller{
+class Structure extends Controller{
 
 	public function __construct(){
 		parent::__construct();

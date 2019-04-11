@@ -5,7 +5,7 @@ use Admin\model\ProductDao;
 use Admin\model\OwnersDao;
 use Admin\model\ProPhoDao;
 
-class PhotoController extends Controller {
+class Photo extends Controller {
 	
 	private $daopropho;
 	private $daoproduct;

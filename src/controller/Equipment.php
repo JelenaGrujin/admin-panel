@@ -3,9 +3,9 @@ namespace Admin\controller;
 
 use Admin\model\EquipmentDao;
 
-class EquipmentController{
+class Equipment{
 
-    public $daoequipment;
+    public $dao_equipment;
     
 	public function __construct(){
 		
@@ -14,9 +14,9 @@ class EquipmentController{
 
 	public function showEquipment() {
 	    
-	    $daoequipment = new EquipmentDao();
+	    $dao_equipment = new EquipmentDao();
 	   
-	    $equilist=$daoequipment->selectFromEquipment();
+	    $equilist=$dao_equipment->selectFromEquipment();
 		
 		$page_basepa='active';
 		$page_equipment = 'active';
@@ -29,11 +29,11 @@ class EquipmentController{
 		$name_equipment=isset($_POST['new_equipment'])?$_POST['new_equipment']:"";
 		
 			
-			$this->daoequipment->insertIntoEquipment($name_equipment);
+			$this->dao_equipment->insertIntoEquipment($name_equipment);
 			
 			$msg='Successfully';
 			
-			$equilist=$this->daoequipment->selectFromEquipment();
+			$equilist=$this->dao_equipment->selectFromEquipment();
 			
 			$page_basepa='active';
 			$page_equipment = 'active';
@@ -49,7 +49,7 @@ class EquipmentController{
 		
 		if ($id_equipment){
 			
-			$this->daoequipment->deleteFromEquipment($id_equipment);
+			$this->dao_equipment->deleteFromEquipment($id_equipment);
 			$msg='Successfully';
 
 		}else {

@@ -9,7 +9,7 @@ use Admin\model\typeDao;
 use Admin\model\EquipmentDao;
 use Admin\model\OwnDocDao;
 
-class ProductController{
+class Product{
 
 	
 	public function __construct(){
@@ -24,9 +24,11 @@ class ProductController{
 	}
 	
 	public function showProduct(){
-		
-		//$productlist=$this->daoproduct->selectFromProducts();
-		//$ownerlist=$this->daoowner->selectFromOwners();
+        $con= new Controller();
+        $con->redirect();
+
+        $productlist=$this->daoproduct->selectFromProducts();
+		$ownerlist=$this->daoowner->selectFromOwners();
 
 		$page_productpa='active';
 		$page_list_productpa='active';	

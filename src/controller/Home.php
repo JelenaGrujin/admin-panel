@@ -5,16 +5,19 @@ use Admin\model\ProductDao;
 use Admin\model\OwnersDao;
 use Admin\model\ProPhoDao;
 
-class HomeController{
+class Home {
 	
 	public function __construct(){
-		
-	    $this->daopropho = new ProPhoDao();
+
+	    $this->dao_pro_pho = new ProPhoDao();
 		
 	}
-	
+
 	public static  function showHome() {
-	    $daoproduct = new ProductDao();
+
+	    $con= new Controller();
+	    $con->redirect();
+		$daoproduct = new ProductDao();
 		$productlist=$daoproduct->selectFromProducts();
 		
 		$daoowner = new OwnersDao();
@@ -83,13 +86,11 @@ class HomeController{
 		foreach ($products as $pro){
 			$id_pro=$pro['id_product'];
 		}
-		$photos=$this->daopropho->selectFromProductsPhoto($id_pro);
+		$photos=$this->dao_pro_pho->selectFromProductsPhoto($id_pro);
 		$owners=$this->daoowner->selectFromOwnersById($id_owner);
 
 		$page_birthday_view = 'active';
 		include 'homefiles/home_link.php';
 	}
-	
 }
-
 ?>

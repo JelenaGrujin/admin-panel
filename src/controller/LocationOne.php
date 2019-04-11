@@ -4,7 +4,7 @@ namespace Admin\controller;
 use Admin\controller\Controller;
 use Admin\model\LocationOneDao;
 
-class LocationOneController extends Controller{
+class LocationOne extends Controller{
 
 	public function __construct(){
 

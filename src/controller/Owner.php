@@ -8,7 +8,7 @@ use Admin\model\OwnersDao;
 use Admin\model\OwnDocDao;
 use Admin\model\ProPhoDao;
 
-class OwnerController {
+class Owner {
 
 		public function __construct() {
 	     	$this->daouser = new UserDao();
@@ -19,7 +19,8 @@ class OwnerController {
 	     }
 
 	public function showOwners(){
-		
+        $con= new Controller();
+        $con->redirect();
 		
 		$ownerslist=$this->daoown->selectFromOwners();
 		

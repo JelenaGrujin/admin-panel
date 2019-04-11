@@ -1,16 +1,17 @@
 <?php 
-namespace Admin\session;
+namespace Admin\classes;
 
 class Session{
-
+	
 	public function __construct(){
+	   
 		if (!isset($_SESSION)) {
 			$this->onSession();
 		}
 		
 	}
 	
-	private static function onSession(){
+	public function onSession(){
 		
 		session_start();
 		
@@ -22,20 +23,21 @@ class Session{
 	
 	}
 
-	public function create_session($session_name, $datainfo=false){
+	public function create_session($session_name, $data_info=false){
 		if (!isset($_SESSION[$session_name])) {
-			if ($datainfo==false) {
+		    if ($data_info==false) {
 				$_SESSION[$session_name]=array();
 			}else{
 				$_SESSION[$session_name]='';
 			}
+		
 		}
 	}
 	
-	public function fillSession($session_name, $datainfo){
+	public function fillSession($session_name, $data_info){
 		
 		if (isset($_SESSION[$session_name])){
-			$_SESSION[$session_name][]=$datainfo;
+			$_SESSION[$session_name][]=$data_info;
 		}else {
 			$_SESSION[$session_name]=array();
 		}
@@ -57,6 +59,8 @@ class Session{
 		
 		if(isset($_SESSION[$session_name])){
 			return true;
+		}else{
+			return false;
 		}
 		
 	}
