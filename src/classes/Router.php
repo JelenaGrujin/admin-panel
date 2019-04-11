@@ -1,16 +1,18 @@
-<?php 
+<?php
 namespace Admin\classes;
 
-use Admin\controller\LogController;
+use Admin\classes\Session;
+use Admin\controller\Log;
+use function Composer\Autoload\includeFile;
 
 class Router{
-   
+
     public $routes = [
         
         'GET'=>[],
         'POST'=>[]
     ];
-
+    
     public static function insert($file){
         
         $ruter = new self();
@@ -26,27 +28,27 @@ class Router{
     public function post($url, $controller){
         $this->routes['POST'][$url]=$controller;
     }
-    
-    public function direct($url, $method) {
 
+    public function direct($url, $method) {
+        
         if (array_key_exists($url, $this->routes[$method])){
             
-            $this->callAction(...explode('::', $this->routes[$method][$url]));
-           
-        }else {
-           
-            echo'route does not exist';
+             $this->callAction(...explode('::', $this->routes[$method][$url]));
+             
+        }else{
+            echo 'route does not exist';
         }
-        
-}
 
-    protected function callAction($controller, $action) {
-        
-        $c="Admin\\controller\\$controller";
-        
-        $con=new $c;
-        $con->$action();
     }
+    
+    protected function callAction($controller, $action) {
 
+            $c="Admin\\controller\\$controller";
+            $con=new $c;
+            $con->$action();
+
+    }
+    
 }
 ?>
+  

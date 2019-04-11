@@ -1,13 +1,16 @@
 <?php
-$ruter->get('index.php', 'LogController::showView');
-$ruter->post('home', 'LogController::login');
-$ruter->get('logout', 'LogController::logout');
-$ruter->get('product', 'ProductController::showProduct');
-$ruter->post('type', 'ProducTypeController::showTypeProduct');
-$ruter->get('new_product', 'NewProductController::showInfo');
-$ruter->get('owner', 'NewProductController::showOwner');
-$ruter->get('photos', 'NewProductController::showPhotos');
-$ruter->get('corporate', 'NewProductController::showCorporate');
-$ruter->get('personal', 'NewProductController::showPersonal');
-$ruter->get('owners', 'OwnerController::showOwners');
+
+            $ruter->get('index.php', 'Log::showLog');
+            $ruter->post('home', 'Log::login');
+            $ruter->get('home', 'Home::showHome');
+            $ruter->get('logout', 'Log::logout');
+            $ruter->get('product', 'Product::showProduct');
+            $ruter->get('type', 'ProductType::showTypeProduct');
+            $ruter->get('new_product', 'NewProduct::showInfo');
+            $ruter->get('owner', 'NewProduct::showOwner');
+            $ruter->get('photos', 'NewProduct::showPhotos');
+            $ruter->get('corporate', 'NewProduct::showCorporate');
+            $ruter->get('personal', 'NewProduct::showPersonal');
+            $ruter->get('owners', 'Owner::showOwners');
+
 ?>

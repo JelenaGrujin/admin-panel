@@ -1,5 +1,5 @@
 <?php 
-
+namespace Admin\classes;
 
 class Login{
 	
@@ -9,6 +9,7 @@ class Login{
 	
 	public function setUsername($username) {
 		$this->username=$username;
+		
 	}
 	
 	public function getUsername() {
@@ -25,7 +26,7 @@ class Login{
 	public function getPassword() {
 		return $this->password;
 	}
-	
+
 }
 
 

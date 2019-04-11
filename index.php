@@ -8,5 +8,6 @@ use Admin\classes\Request;
 $ruter = Admin\classes\Router::insert('Route.php');
 
 $ruter->direct(Request::url(), Request::method());
+
 include 'view/footer.php';
 ?>

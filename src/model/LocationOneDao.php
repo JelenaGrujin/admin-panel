@@ -2,6 +2,7 @@
 namespace Admin\model;
 
 use Admin\config\DB;
+use Admin\model\DAO;
 
 class LocationOneDao extends DAO{
 	

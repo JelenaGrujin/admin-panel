@@ -4,7 +4,7 @@ namespace Admin\controller;
 use Admin\controller\Controller;
 use Admin\model\typeDao;
 
-class ProductTypeController{
+class ProductType{
 
 	public function __construct(){
 
@@ -13,7 +13,9 @@ class ProductTypeController{
 	}
 
 	public function showTypeProduct(){
-		
+        $con= new Controller();
+        $con->redirect();
+
 		$typeslist=$this->daotype->selectFromProductType();
 		
 		$page_basepa='active';
