@@ -2,40 +2,39 @@
 namespace Admin\controller;
 
 use Admin\classes\Login;
-use Admin\session\Session;
+use Admin\classes\Session;
 use Admin\model\UserDao;
 
 use function Composer\Autoload\includeFile;
 
-class LogController {
+class Log{
     
     protected $session_name='user';
     public $user;
-    public $daouser;
+    public $dao_user;
     public $session;
     public $home;
 
-    
     public function __construct(){
-
+        
         $this->session = new Session();
-        $this->daouser = new UserDao();
+        $this->dao_user = new UserDao();
         $this->user = new Login();
-        $this->home = new HomeController();
+        $this->home = new Home();
     }
     
-    public function showView(){
+    public function showLog(){
         
         include 'view/login.php';
       
     }
-    
+
     public function login(){
      
         $this->user->setUsername($_POST['username']?$_POST['username']:"");
         $this->user->setPassword($_POST['password']?$_POST['password']:"");
         
-        $user=$this->daouser->selectUserByUsernameAndPassword($this->user->getUsername(), $this->user->getPassword());
+        $user=$this->dao_user->selectUserByUsernameAndPassword($this->user->getUsername(), $this->user->getPassword());
        
         if (!empty($user)){
            
@@ -43,18 +42,8 @@ class LogController {
           $this->session->serializeSession($this->session_name, $user);
         
         }
-          self::redirect();
-    }
 
-    public function redirect() {
-
-        if ($this->session->sessionExist($this->session_name)==true){
-            
-            $this->home->showHome();
-        }else {
-            header('Location:index.php?$msgg=need to login');
-            
-        }
+        $this->home->showHome();
     }
     
     public function logout(){
