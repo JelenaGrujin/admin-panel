@@ -2,9 +2,8 @@
 namespace Admin\model;
 		
 use Admin\config\DB;
-use Admin\model\DAO;
 	
-	class EquipmentDao extends DAO {
+	class EquipmentDao {
 	    private $db;
 	   
          private $INSERT_INTO_EQUIPMENT="INSERT INTO equipment (name_equipment) VALUES(?)";
@@ -12,7 +11,6 @@ use Admin\model\DAO;
          private $DELETE_FROM_EQUIPMENT="DELETE FROM equipment WHERE id_equipment=?";
         
 		public function __construct(){
-	    	//parent::__construct();
 	    	$this->db = DB::getInstance();
 	     	$this->db = $this->db->getConnection();
 	    }

@@ -1,3 +1,6 @@
+<?php
+	$page_new = isset($page_new_product)?$page_new_product:"";
+?>
 <nav class="navbar navbar-expand-lg navbar-dark">
 	<nav class="navbar navbar-expand-sm">
 		<ul class="navbar-nav">

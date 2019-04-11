@@ -1,6 +1,8 @@
 <?php
-		require_once '../config/db.php';
-		require_once 'DAO.php';
+namespace Admin\model;
+	
+use Admin\config\DB;
+use Admin\model\DAO;
 	
 	class ProductDao extends DAO 
 	{

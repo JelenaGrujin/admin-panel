@@ -1,5 +1,4 @@
 <?php
-	$user=unserialize($_SESSION['user']);
 	$page_home = isset($page_homepa)?$page_homepa:"";
 	$page_product = isset($page_productpa)?$page_productpa:"";
 	$page_pro_type = isset($page_basepa)?$page_basepa:"";
@@ -21,7 +20,7 @@
 	</nav>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto"></ul>
-		<div class="navbar-brand text-white">Logged in: <?php echo $user[0]['username']; ?></div>
+		<div class="navbar-brand text-white">Logged in: <?php // echo $user[0]['username']; ?></div>
 		<a class="btn bg-danger text-white font-weight-bold" href="logout">Log out</a>
 	</div>
 </nav>

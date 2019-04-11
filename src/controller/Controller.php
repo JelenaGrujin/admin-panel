@@ -2,51 +2,27 @@
 namespace Admin\controller;
  
 use Admin\model\DAO;
-use Admin\model\TypeDao;
-use Admin\model\EquipmentDao;
-use Admin\model\LocationOneDao;
-use Admin\model\LocationTwoDao;
-use Admin\model\LocationThreeDao;
-use Admin\model\ProductDao;
-use Admin\model\OwnersDao;
-use Admin\model\UserDao;
-use Admin\model\ProPhoDao;
-use Admin\model\OwnDocDao;
-use Admin\model\StructureDao;
+use Admin\classes\Session;
 
 class Controller{
 
-	private $daotype;
-	private $daoequipment;  
-	private $daolone;
-	private $daoltwo;
-	private $daolthree;
-	private $daopro;
-	private $daoown;
-	private $daouser;
-	private $daopropho;
-	private $daoowndoc;
-	private $daostructure;
-		
-		public function __construct() {
-	     	$this->dao = new DAO();
-	     	$this->daotype = new TypeDao();
-	     	$this->daoequipment = new EquipmentDao();
-	     	$this->daolone = new LocationOneDao();
-	     	$this->daoltwo = new LocationTwoDao();
-	     	$this->daolthree = new LocationThreeDao();
-			$this->daopro = new ProductDao();     
-			$this->daoown = new OwnersDao();
-			$this->daouser = new UserDao();
-			$this->daopropho = new ProPhoDao();
-			$this->daoowndoc = new OwnDocDao();
-			$this->daostructure = new StructureDao(); 
-		}
- 
-		public static function showView($page){
+    public function __construct()
+    {
+    }
+
+    public static function showView($page){
 		    require_once 'view/'.$page.'.php';
 		}
-		
+
+    public function redirect() {
+
+        $session= new Session();
+        if ($session->sessionExist('user')==false){
+
+            header('Location:index.php?$msg=need to login');
+        }
+    }
+
 	    public function Send(){
 		$e_mail=isset($_POST['e_mail'])?$_POST['e_mail']:"";
 		$message=isset($_POST['message'])?$_POST['message']:"";

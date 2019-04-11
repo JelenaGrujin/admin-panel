@@ -1,6 +1,6 @@
 <?php
 namespace Admin\model;
-	
+
 use Admin\config\DB;
 use Admin\model\DAO;
 	
