@@ -23,7 +23,7 @@ class Session{
 	
 	}
 
-	public function create_session($session_name, $data_info=false){
+	public function createSession($session_name, $data_info=false){
 		if (!isset($_SESSION[$session_name])) {
 		    if ($data_info==false) {
 				$_SESSION[$session_name]=array();

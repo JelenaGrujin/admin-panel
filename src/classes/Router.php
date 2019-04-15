@@ -1,8 +1,6 @@
 <?php
 namespace Admin\classes;
 
-use Admin\classes\Session;
-use Admin\controller\Log;
 use function Composer\Autoload\includeFile;
 
 class Router{

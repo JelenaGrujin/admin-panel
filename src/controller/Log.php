@@ -38,7 +38,7 @@ class Log{
        
         if (!empty($user)){
            
-          $this->session->create_session($this->session_name);
+          $this->session->createSession($this->session_name);
           $this->session->serializeSession($this->session_name, $user);
         
         }

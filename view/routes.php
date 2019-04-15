@@ -2,7 +2,7 @@
 $ruter->get('index.php', 'Log::showView');
 $ruter->post('home', 'Log::login');
 $ruter->get('logout', 'Log::logout');
-$ruter->get('product', 'Product::showProduct');
+$ruter->get('product', 'ProductInfo::showProduct');
 $ruter->post('type', 'ProducTypeController::showTypeProduct');
 $ruter->get('new_product', 'NewProductController::showInfo');
 $ruter->get('owner', 'NewProductController::showOwner');

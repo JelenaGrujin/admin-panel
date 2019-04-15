@@ -70,7 +70,7 @@ class Photo extends Controller {
 				
 			}else {
 				
-				$msg='Product ID: '.$id_product.' does not have any more photos in the database';
+				$msg='ProductInfo ID: '.$id_product.' does not have any more photos in the database';
 
 				$productlist=$this->daoproduct->selectFromProducts();
 				$ownerlist=$this->daoowner->selectFromOwners();

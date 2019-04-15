@@ -13,10 +13,11 @@ use Admin\model\UserDao;
 use Admin\model\ProPhoDao;
 use Admin\model\StructureDao;
 use Admin\classes\Session;
+use Admin\classes\ProductInfo;
 
 class NewProduct{
-	
-	public $datainfo=array('id_euro', 'location_data_1', 'location_data_2', 'location_data_3', 'addres_location', 'adres_num', 'number', 'object', 'flors', 'of_flors', 'price', 'min_price', 'deposit', 'commission', 'payment', 'square', 'surface_area', 'equipment', 'celing_height', 'structure', 'heating', 'carpentry', 'kitchen', 'num_rooms', 'num_bath', 'num_wc', 'num_terrace', 'level', 'salon_m', 'security', 'num_elevator', 'construc_year', 'num_air_con', 'num_garages', 'note', 'description', 'active', 'active_data', 'info', 'electricity', 'network', 'maintenance', 'accessories', 'garage', 'provider', 'type_terrace', 'type_bath', 'product_type', 'business_status');
+
+	public $product_info=array('id_euro', 'location_data_1', 'location_data_2', 'location_data_3', 'addres_location', 'adres_num', 'number', 'object', 'flors', 'of_flors', 'price', 'min_price', 'deposit', 'commission', 'payment', 'square', 'surface_area', 'equipment', 'celing_height', 'structure', 'heating', 'carpentry', 'kitchen', 'num_rooms', 'num_bath', 'num_wc', 'num_terrace', 'level', 'salon_m', 'security', 'num_elevator', 'construc_year', 'num_air_con', 'num_garages', 'note', 'description', 'active', 'active_data', 'info', 'electricity', 'network', 'maintenance', 'accessories', 'garage', 'provider', 'type_terrace', 'type_bath', 'product_type', 'business_status');
 	private $session_name='product';
 	
 	public function __construct() {
@@ -34,6 +35,7 @@ class NewProduct{
 		$this->owncon = new Owner();
 		$this->protyco = new ProductType();
 		$this->session = new Session();
+		$this->product = new ProductInfo();
 	}
 	
 	public function showInfo(){
@@ -44,6 +46,7 @@ class NewProduct{
 		
 		$typeslist=$this->daotype->selectFromProductType();
 		$equilist=$this->daoequipment->selectFromEquipment();
+
 		$listlocation1=$this->daolone->selectFromLocation1();
 		$listlocation2=$this->daoltwo->selectFromLocation2();
 		$listlocation3=$this->daolthree->selectFromLocation3();
@@ -122,12 +125,28 @@ class NewProduct{
 		
 		
 	}
-	
+
+	public function confirmNewProduct(){
+
+		$product=self::getData();
+
+		$this->session->createSession($this->session_name);
+		$this->session->fillSession($this->session_name, $product);
+
+		$con = new Controller();
+		if (isset($pause)){
+			$con->redirect();
+		}elseif (isset($confirm_info)){
+			$con->redirect();
+		}
+
+	}
+
 	public function insertInfo($datainfo){
 		if ($id_owner==NULL) {
 		$datainfo=array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
 			if ($datainfo){
-				$this->session->create_session($this->session_name);
+				$this->session->createSession($this->session_name);
 				$this->session->fillSession($this->session_name, $datainfo);
 				$msg='successfully';
 				self::showOwner();
@@ -210,10 +229,9 @@ class NewProduct{
 		$security=implode(', ', $sec);
 		$garage=implode(', ', $gar);
 		
-		$postinfo=array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
-		$productinfo=array_combine($this->datainfo, $postinfo);
-		return $productinfo;
-		
+		$post_info=array($id_euro, $location_data_1, $location_data_2, $location_data_3, $addres_location, $adres_num, $number, $object, $flors, $of_flors, $price, $min_price, $deposit, $commission, $payment, $square, $surface_area, $equipment, $celing_height, $structure, $heating, $carpentry, $kitchen, $num_rooms, $num_bath, $num_wc, $num_terrace, $level, $salon_m, $security, $num_elevator, $construc_year, $num_air_con, $num_garages, $note, $description, $active, $active_data, $info, $electricity, $network, $maintenance, $accessories, $garage, $provider, $type_terrace, $type_bath, $product_type, $business_status);
+		$product_info=array_combine($this->product_info, $post_info);
+		return $this->product_info;
 	}
 	
 	public function pause(){

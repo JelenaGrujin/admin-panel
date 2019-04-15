@@ -14,8 +14,16 @@
 	$aces=isset($aces)?$aces:array();
 	$product_type=isset($product_type)?$product_type:array();
 	$id_owner=isset($id_owner)?$id_owner:"";
+    $listlocation1=isset($listlocation1)?$listlocation1:array();
+    $listlocation2=isset($listlocation2)?$listlocation2:array();
+    $listlocation3=isset($listlocation3)?$listlocation3:array();
+    $typeslist=isset($typeslist)?$typeslist:array();
+    $strlist=isset($strlist)?$strlist:array();
+    $equilist=isset($equilist)?$equilist:array();
+    $listakitchen=isset($listakitchen)?$listakitchen:array();
+
 ?>
-<form class="form" action="routes.php" method="POST">
+<form class="form" action="new_product" method="POST">
 	<span class="text-dark"><strong>Basic data:</strong></span>
 	<div class="row bg-light text-danger border border-primary mt-2 mb-1">
 		<div class="col-1 m-3">
