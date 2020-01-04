@@ -1,8 +1,6 @@
 <?php
 namespace Admin\classes;
 
-use function Composer\Autoload\includeFile;
-
 class Router{
 
     public $routes = [
@@ -10,13 +8,13 @@ class Router{
         'GET'=>[],
         'POST'=>[]
     ];
-    
+
     public static function insert($file){
         
-        $ruter = new self();
+        $router = new self();
         
         require_once $file;
-        return $ruter;
+        return $router;
     }
     
     public function get($url, $controller){
@@ -27,26 +25,14 @@ class Router{
         $this->routes['POST'][$url]=$controller;
     }
 
-    public function direct($url, $method) {
-        
+    public function direct($url, $method){
+
+        $redirect= new Redirect();
         if (array_key_exists($url, $this->routes[$method])){
-            
-             $this->callAction(...explode('::', $this->routes[$method][$url]));
-             
+               $redirect->callAction(...explode('::',$this->routes[$method][$url]));
         }else{
-            echo 'route does not exist';
+            $redirect->callAction('Login','showError');
         }
 
     }
-    
-    protected function callAction($controller, $action) {
-
-            $c="Admin\\controller\\$controller";
-            $con=new $c;
-            $con->$action();
-
-    }
-    
 }
-?>
-  

@@ -1,6 +1,9 @@
 {
     "name": "zverina/admin-panel",
-    "require": {},
+    "require": {
+        "phpmailer/phpmailer": "^6.0",
+      "ext-zip": "*"
+    },
 	
 	"autoload":{
 		"psr-4":{

@@ -1,35 +1,26 @@
 <?php 
 namespace Admin\controller;
 
-use Admin\model\ProductDao;
+use Admin\model\ProductsDao;
 use Admin\model\OwnersDao;
-use Admin\model\ProPhoDao;
+use Admin\model\PhotoDao;
 
 class Photo extends Controller {
-	
-	private $daopropho;
-	private $daoproduct;
-	private $daoowner;
-	
-	public function __construct() {
-	     	$this->daoproduct = new ProductDao();
-	     	$this->daoowner = new OwnersDao();
-	     	$this->daopropho = new ProPhoDao();
-	     }
-	
-	
-	public function showProductPhotos(){
+
+	public function showPhotos(){
 		
-		$id_product=isset($_GET['id_product'])?$_GET['id_product']:"";
-		
-		$photos = $this->daopropho->selectFromProductsPhoto($id_product);
+		$id=isset($_GET['id'])?$_GET['id']:"";
+
+		$photo=new PhotoDao();
+		$photos=$photo->selectByProduct($id);
 
 		if (empty($photos)) {
 			$msg='No pictures in the database';
 		}
 
+        $page_product='active';
 		$page_product_photo = 'active';
-		include 'app_link.php';
+		include 'view/app_link.php';
 	}
 	
 	public function showEditPhotos(){

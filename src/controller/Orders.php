@@ -123,7 +123,7 @@ class Orders extends Controller {
 				$page_tip_nekretnine = 'active';
 				$page_type_product = 'active';
 				$container = 'container';
-				include 'basefiles/base_link.php';
+				include 'base_files/base_link.php';
 				
 			}else {
 				$msg='Pokusajte ponovo ';

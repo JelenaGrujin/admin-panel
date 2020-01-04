@@ -1,96 +1,94 @@
 <?php 
 namespace Admin\controller;
 
-use Admin\model\ProductDao;
-use Admin\model\OwnersDao;
-use Admin\model\ProPhoDao;
+use Admin\model\PhotoDao;
 
-class Home {
+class Home extends Controller {
+
+    private $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function setID($id){
+        $this->id=$id;
+    }
+
+    public function getID(){
+        return $this->id;
+    }
+
+    public function showHome(){
+
+        $this->redirect->sessionRedirect();
+        $product_list=$this->productsList();
+		$owner_list=$this->ownersList();
+        $cookie=isset($_COOKIE['cookie'])?$_COOKIE['cookie']:array();
+		
+		$make_month=date("d-m-Y", strtotime("+1 months"));
+		$make_week=date("d-m-Y", strtotime("+1 week"));
+		$make_day=date("d-m-Y", strtotime("+1 day"));
+		$make_d=date("d-m-Y", strtotime("-1 day"));
+
+		$page_home = 'active';
+		include 'view/home_files/home_link.php';
+	}
+
+	public function reminder(){
+
+        $id=isset($_GET['id'])?$_GET['id']:"";
+        !empty($id)?$this->setCookie($id):$this->setMsg();
+
+    }
 	
-	public function __construct(){
+	public function setCookie($id){
 
-	    $this->dao_pro_pho = new ProPhoDao();
-		
-	}
+        setcookie("cookie[$id]", date("d-m-Y"), time()+86400);
 
-	public static  function showHome() {
-
-	    $con= new Controller();
-	    $con->redirect();
-		$daoproduct = new ProductDao();
-		$productlist=$daoproduct->selectFromProducts();
-		
-		$daoowner = new OwnersDao();
-		$ownerlist=$daoowner->selectFromOwners();
-		
-		$makemonth=date("d-m-Y", strtotime("+1 months")); 
-		$makeweek=date("d-m-Y", strtotime("+1 week")); 
-		$makeday=date("d-m-Y", strtotime("+1 day"));
-		$maked=date("d-m-Y", strtotime("-1 day"));
-
-		$page_homepa = 'active';
-		include 'view/homefiles/home_link.php';
-	}
-	
-	public function klikPro(){
-		
-		$id_pro=isset($_GET['id_product'])?$_GET['id_product']:"";
-		$time=date("d-m-Y");
-		if (!empty($id_pro)){
-			setcookie("kukit[$id_pro]", date("d-m-Y"), time()+86400);
-		}else {
-			echo $msg='Invalid ID, call the service';
-		}
-	}
-
-	public function unsetKukiPro(){
-		
-		$id_pro=isset($_GET['id_product'])?$_GET['id_product']:"";
-		if (!empty($id_pro)) {
-			foreach ($_COOKIE['kukit'] as $k => $v) {
-				if ($id_pro==$k){
-					setcookie("kukit[$id_pro]", date("d-m-Y"), time()-86400);
-				}
-			}
-		}else {
-			 $msg='Invalid ID, call the service';
-		}
-	}
-	
-	public function kliOwn(){
-		
-		$id_own=isset($_GET['$id_owner'])?$_GET['$id_owner']:"";
-		$time=date("d-m-Y");
-
-		setcookie("kukio[$id_own]", date("d-m-Y"), time()+86400);
+        header('Location:home');
 
 	}
-	
-	public function unsetKukiOwn(){
-		$id_own=isset($_GET['$id_owner'])?$_GET['$id_owner']:"";
-		if (!empty($id_own)) {
-			foreach ($_COOKIE['kukio'] as $k => $v) {
-				if ($id_own==$k){
-					setcookie("kukio[$id_own]", date("d-m-Y"), time()-86400);
-				}
-			}
-		}else {
-			 $msg='Invalid ID, call the service';
-		}
-	}
-	
-	public function showBirth_view(){
-		$id_owner=isset($_GET['id_ownera'])?$_GET['id_ownera']:"";
-		
-		$products=$this->daoproduct->selectFromProductByIdOwner($id_owner);
-		foreach ($products as $pro){
-			$id_pro=$pro['id_product'];
-		}
-		$photos=$this->dao_pro_pho->selectFromProductsPhoto($id_pro);
-		$owners=$this->daoowner->selectFromOwnersById($id_owner);
+
+	public function setMsg(){
+
+        echo $msg='<script>alert("Invalid ID, call the service!");</script>';
+    }
+
+    public function unsetReminder(){
+
+        $id=isset($_GET['id'])?$_GET['id']:"";
+        $this->unsetCookie($id);
+        header('Location:home');
+
+    }
+
+    public function unsetCookie($id){
+
+        setcookie("cookie[$id]", date("d-m-Y"), time()-86400);
+    }
+
+	public function showBdayCard(){
+
+		$id=isset($_GET['id'])?$_GET['id']:"";
+		$products=$this->products->selectByIdOwner($id);
+		$dao_pho=new PhotoDao();
+		$photos=$dao_pho->selectByProduct($products['0']['id_products']);
+		$owner=$this->owners->selectById($id);
 
 		$page_birthday_view = 'active';
-		include 'homefiles/home_link.php';
+		include 'view/home_files/home_link.php';
 	}
+
+	public function sendBdayCard(){
+        $e_mail=isset($_POST['e_mail'])?$_POST['e_mail']:"";
+        $title=isset($_POST['title'])?$_POST['title']:"";
+        $message=isset($_POST['message'])?$_POST['message']:"";
+        $send=new SendMail();
+        $send->sendMail($e_mail,$title,$message);
+
+        $this->showHome();
+    }
 }
 ?>

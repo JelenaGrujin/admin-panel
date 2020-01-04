@@ -1,65 +1,39 @@
 <?php
 namespace Admin\controller;
 
-use Admin\controller\Controller;
 use Admin\model\LocationTwoDao;
 
 class LocationTwo extends Controller{
 
-	public function __construct(){
-		parent::__construct();
-	    $this->daoltwo = new LocationTwoDao();
+    private $location_two_info = array('new');
 
-	}
+    public function showInfo($data=null) {
 
-	public function showLocation2(){
-		
-		
-		$listlocation2=$this->daoltwo->selectFromLocation2();
-		
-		$page_basepa='active';
-		$page_location = 'active';
-		$page_location_2 = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function newLocation2(){
-		
-		$name_location_2=isset($_POST['new_location_2'])?$_POST['new_location_2']:"";
-		
-		
-		$this->daoltwo->insertIntoLocation2($name_location_2);
-		
-		$listlocation2=$this->daoltwo->selectFromLocation2();
-		
-		$page_basepa='active';
-		$page_location = 'active';
-		$page_location_2 = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-		
-	}
-	
-	public function deleteLocation2(){
-		
-		$id_location_2=isset($_GET['id_location_2'])?$_GET['id_location_2']:"";
-		
-		
-		if ($id_location_2){
-			
-			$this->daoltwo->deleteFromLocation2($id_location_2);
-			$msg='Successfully';
+        $errors = is_array($data) ? $data : array();
 
-		}else {
+        $list=$this->lTwoList();
 
-			$msg='Something is wrong';
+        $page_base='active';
+        $page_location = 'active';
+        $page_location_2 = 'active';
+        $container = 'container';
+        include 'view/base_files/base_link.php';
+    }
 
-		}
-		
-	}
+    public function getData()
+    {
+        $new = isset($_POST['new']) ? $_POST['new'] : "";
+        $post_info = array($new);
+        $combined_array = array_combine($this->location_two_info, $post_info);
+
+        return $combined_array;
+    }
+
+    public function insertInfo($data = null)
+    {
+        $this->locationTwo->insertInto($data['new']);
+
+        $this->showInfo();
+    }
 
 }
-
-
-?>

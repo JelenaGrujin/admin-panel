@@ -1,408 +1,119 @@
 <?php
 namespace Admin\controller;
  
-use Admin\model\DAO;
+use Admin\classes\Redirect;
 use Admin\classes\Session;
+use Admin\classes\Validator;
 
-class Controller{
+class Controller extends DaoHandler
+{
+    public $post_data=array();
+    public $redirect;
+    public $session;
+    public $validator;
 
     public function __construct()
     {
+        parent::__construct();
+        $this->redirect = new Redirect();
+        $this->session = new Session();
+        $this->validator = new Validator();
     }
 
-    public static function showView($page){
-		    require_once 'view/'.$page.'.php';
-		}
+    public function set($item,$value){
 
-    public function redirect() {
+        $this->post_data[$item]=$value;
+    }
 
-        $session= new Session();
-        if ($session->sessionExist('user')==false){
-
-            header('Location:index.php?$msg=need to login');
+    public function setPostItem($array){
+        foreach ($array as $item=>$value) {
+           if (is_array($value)){
+               $this->setArray($item,$value);
+           }else{
+               $this->set($item,$value);
+           }
         }
     }
 
-	    public function Send(){
-		$e_mail=isset($_POST['e_mail'])?$_POST['e_mail']:"";
-		$message=isset($_POST['message'])?$_POST['message']:"";
-		$title=isset($_POST['title'])?$_POST['title']:"";
-		mail($e_mail, $title, $message);
-		
-		$listanekretnina=$this->dao->selectFromNekretnina();
-		$listakontakata=$this->dao->selectFromKontak();
+    public function setFiles(){
 
-		$page_home = 'active';
-		include 'homefiles/home_link.php';
-		
-	}
+        foreach ($_FILES as $item=>$value){
+            $this->post_data[$item]=$value;
+        }
+    }
 
-	//prikaz dokumenata po ID vlsanika
-	public function showOwnersDoc(){
-		
-		$id_owner=isset($_GET['id_owner'])?$_GET['id_owner']:"";
-		$dao= new DAO();
-		
-		$docs=$this->daoowndoc->selectFromOwnersDocByOwner($id_owner);
-		if (empty($docs)){
-			
-			$msg='Owner id:'.$id_owner.' does not have any documents';
-		}
-		
-		$page_productpa='active';
-		$page_owners_doc='active';
-		include 'app_link.php';
-	}
-	
-	//prikaz pojedinacnog dokumenta u pdf formatu
-	public function showDokument(){
-		
-		$naziv_dokumenta=isset($_GET['naziv_dok'])?$_GET['naziv_dok']:"";
-		
-		$page_productpa='active';		
-		$page_pregled_dokument='active';
-		include 'app_link.php';
-	}
-	
-	//naknadno dodavanje dokumenta vlasnika izdavanja
-	public function dodajDokumenta(){
-		
-		$id_vlasnika=isset($_POST['id_vlasnika'])?$_POST['id_vlasnika']:"";
-	    $naziv_dokumenta=$_FILES['doc']['name'];
-		$naziv_dokumenta_tmp = $_FILES['doc']['tmp_name'];
-		
-		$errors=array();
-			
-			foreach ($naziv_dokumenta as $n_d) {
-				$ext_dok = strtolower(pathinfo($n_d, PATHINFO_EXTENSION));
-					if(!empty($ext_dok) != "pdf"){
-						$errors['ext_dok']='* <br>Dokumenta moraju biti PDF formata';
-					}
-			}
-			$provera_imena=$this->dao->selectFromDokumenta();
-			foreach ($provera_imena as $pi) {
-				$postojace_ime=$pi['naziv_dokumenta'];
-			}
-			if (!empty($naziv_dokumenta)==$postojace_ime){
- 				$errors['dok_postojeci']='* Odaberite jedinstven naziv dokumenta';
-			}
-			$moguce=10-count($provera_imena);
-			if (count($naziv_dokumenta)+count($provera_imena)>10){
-				$errors['mnogo_dok']='* Mozete dodati najviše '.$moguce.' dokumenata';
-			}	
-		if (count($errors)==0){
-			foreach ($_FILES['doc']['tmp_name'] as $key=>$tmp_name){
-				$naziv_dokumenta=$_FILES['doc']['name'][$key];
-				$naziv_dokumenta_tmp = $_FILES['doc']['tmp_name'][$key];
-					if (!empty($naziv_dokumenta) && !empty($naziv_dokumenta_tmp)){
-						$this->dao->insertIntoDokumentaKontakt($naziv_dokumenta, $id_vlasnika);
-						move_uploaded_file($naziv_dokumenta_tmp,"../css/dokumenta/$naziv_dokumenta");                  
-					}
-			}
-		}
-		$dokumenta=$this->dao->selectFromDokumentaByIdKontakta($id_vlasnika);
-		
-		$page_productpa='active';
-		$page_dokumenta_vlasnika='active';
-		include 'app_link.php';
-	}
-	
-	//brisanje dokumenta sa liste i prikaz liste dokumenata istog id vlasnika
-	public function brisiDokument(){
-		
-		$id_dokumenta=$_GET['id_dokumenta']?$_GET['id_dokumenta']:"";
-		
-		$dokumenti=$this->dao->selectFromDokumentaByIdDokumenta($id_dokumenta);
-		$brise=$this->dao->deleteDokumentByIdDokumenta($id_dokumenta);
+    public function setArray($item,$value){
+            $val = implode(', ', $value);
+            $this->set($item, $val);
+    }
 
-			if (!empty($dokumenti)){
-				foreach ($dokumenti as $dok) {
-					
-					$file= '../css/dokumenta/'.$dok['naziv_dokumenta'];
-	          		unlink($file);
-	          		$id_vlasnika=$dok['id_kontakta'];
-				}
-			}else {
-				$msg='Vlasnik ID: '.$id_vlasnika.' nema vise dokumenata';
-			}
-			
-		$dokumenta=$this->dao->selectFromDokumentaByIdKontakta($id_vlasnika);
+    public function get(){
+        return $this->post_data;
+    }
 
-		$page_productpa='active';
-		$page_dokumenta_vlasnika='active';
-		include 'app_link.php';
-	}
+    public function confirm(){
+        $array=$_POST;
+        $this->setPostItem($array);
+        $this->setFiles();
+        $this->validateData($this->get());
+    }
 
-	
-	public function potraznjaBaza(){
-		
-		
-		$potraznja=$this->dao->selectFromStatusPotraznje();
-		
-		$page_basepa='active';
-		$page_potraznja_baza='active';
-		$page_realizacija_baza='active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function obrisiStatus(){
-		
-		$id_statusa=isset($_GET['id_statusa'])?$_GET['id_statusa']:"";
-		
-		$this->dao->deleteStatusPotraznje($id_statusa);
-		
-	}
-	
-	public function novStatus(){
-		
-		$novi_status=isset($_POST['novi_status'])?$_POST['novi_status']:"";
-		
-	
-		if ($novi_status){
-			$nova=$this->dao->insertIntoStatusPotraznje($novi_status);
-			$msg='Uspešno ste upisali novi status potražnje';
-		}else {
-			$msg='Neuspešno, pokušajte ponovo';
-		}
-		
-		$potraznja=$this->dao->selectFromStatusPotraznje();
-		
-		$page_basepa='active';
-		$page_potraznja_baza='active';
-		$page_realizacija_baza='active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-//kartice agenta
+    public function validateData($data)
+    {
+        $this->validator->validate($data, get_class($this));
+        if ($this->validator->error() == false) {
+            $this->insert($data);
+        } else {
+            $this->showView($this->validator->error(), $data);
+        }
+    }
 
-	public function showAgenta() {
-				
-		$page_basepa='active';
-		$page_agent_baza = 'active';
-		$page_upisagenta = 'active';
-		include 'basefiles/base_link.php';
-	}
+    /*old one
+        public function forging($page, $data, $class){
+            switch ($page){
+                case 'pause':
+                    $this->showBaseCard($data=null,'type');     //if submit action pause, redirect on base cards
+                    break;
+                case 'confirm':
+                    $this->validateData($data,$class);      //if submit action is confirm, forward -assoc _POST array- on validations
+                    break;
+                default:
+                    $log = new Login();
+                    $log->showError();      //redirect on 404.html
+            }
+        }
+    */
 
-	public function listaAgenta(){
-		
-		
-		$listaagenata=$this->dao->selectFromAgent();
-		$page_basepa='active';
-		$page_agent_baza = 'active';
-		$page_listaagenta = 'active';
-		include 'basefiles/base_link.php';
-		
-	}
+    public function remove(){
 
-	public function showKarticaAgenta(){
+        $id=isset($_GET['id'])?$_GET['id']:"";
+        $this->delete($id);
+        $this->showView();
 
-		$id_agenta=isset($_GET['id_agenta'])?$_GET['id_agenta']:"";
-		
-		
-		$agent=$this->dao->selectUserById($id_agenta);
-		
-		$page_basepa='active';
-		$page_agent_baza = 'active';
-		$page_kartica_agenta='active';
-		include 'basefiles/base_link.php';
-	}
+    }
 
-	public function showAzuriranjeAgenta(){
-		$id_agenta=isset($_GET['id_age'])?$_GET['id_age']:"";
-		
-		
-		$agent=$this->dao->selectUserById($id_agenta);
-		
-		$page_basepa='active';
-		$page_agent_baza = 'active';
-		$page_azuriraj_agenta='active';
-		include 'basefiles/base_link.php';
-	}
+    public function getPage(){
+        return $page=str_replace('Admin\controller\\','',get_class($this));
+    }
+/*
+    public function showClientsCard($data=null, $id_product=null){        //shows card of product or owners
 
-	public function showUpisAgenta() {
-		
-		$page_basepa='active';
-		$page_agent_baza = 'active';
-		$page_upisagenta = 'active';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function signing(){
-			
-		$name_surname=isset($_POST['name_surname'])?$_POST['name_surname']:"";
-		$address=isset($_POST['address'])?$_POST['address']:"";
-		$phone=isset($_POST['phone'])?$_POST['phone']:"";
-		$e_mail=isset($_POST['e_mail'])?$_POST['e_mail']:"";
-		$username=isset($_POST['username'])?$_POST['username']:"";
-		$pass=isset($_POST['password'])?$_POST['password']:"";
-		$p_pass=isset($_POST['p_password'])?$_POST['p_password']:"";
-		$errors=array();
-		
-		
-		$provemail = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,64}$/';
-		if(empty($e_mail)){
-		$errors['e_mail']='* Niste upisali e_mail adresu';
-		}elseif (!preg_match($provemail, $e_mail)){
-			$errors['e_mail_bad']='* badly typed';
-		}
-		//$e_adresa=$this->dao->selectFromAgent();
- 		//foreach ($e_adresa as $e_a) {
- 		//	$e_postojeca=$e_a['email_agenta'];
- 		//}
- 		//if ($e_postojeca==$email_agenta){
- 		//	$errors['e_mail_posotjeci']='* Adresa vec postoji u bazi vlasnika';
- 		//}
-		$user_name=$this->dao->selectFromUsers();
- 		foreach ($user_name as $u_n) {
- 			$user=$u_n['username'];
- 		if ($user==$username){
- 			$errors['user_existing']='* Username already exists';
- 		}
- 		}
- 		
-		if (!empty($phone) && !is_numeric($phone)){
-		$errors['phone']='* numeric';
-		}
-		if ($pass!=$p_pass){
-		$errors['bad_pass']='* passwords do not match';
-		}	
-		if (count($errors)==0){
-			$usoljeno="4f3gv4fsd354g.$pass.4g56hert";
-		
-			$password=hash('md5', $usoljeno);
-		
-			$this->dao->insertIntoUsers($name_surname, $username, $e_mail, $password, $address, $phone);
-			
-			$msg='Successfully';
-			$listaagenata=$this->dao->selectFromUsers();
-			$page_basepa='active';
-			$page_agent_baza = 'active';
-			$page_listaagenta = 'active';
-			include 'basefiles/base_link.php';
-		}else {
-			$msg='Try again';
-			
-			$page_basepa='active';
-			$page_agent_baza = 'active';
-			$page_upisagenta = 'active';
-			include 'basefiles/base_link.php';
-		}
-		
-	}
-	
-	//kontakti kartice baze
-	
-	public function showVlasnikBaza() {
-		
-		
-		$lisatizvorapodatka=$this->dao->selectFromIzvorPodatka();
-		
-		$page_basepa='active';
-		$page_vlasnik_baza = 'active';
-		$page_tipvlasnika = 'active';
-		$page_izvorpodatka = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function showStatusKontakta() {
-		
-		
-		$listastatusakontakta=$this->dao->selectFromStatusKontakta();
-		
-		$page_basepa='active';
-		$page_vlasnik_baza = 'active';
-		$page_statuskontakta = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function noviStatusKontakta(){
-		
-		$ime_statusa_kontakta=isset($_POST['novi_statuskontakta'])?$_POST['novi_statuskontakta']:"";
-		
-		
-		$this->dao->insertStatusKontakta($ime_statusa_kontakta);
-		$msg='Uspesno ste upisali novi status kontakta';
-		$listastatusakontakta=$this->dao->selectFromStatusKontakta();
-		
-		$page_basepa='active';
-		$page_vlasnik_baza = 'active';
-		$page_statuskontakta = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-		
-	}
-	
-	public function obrisiStatusKontakta(){
-		
-		$id_statusa_kontakta=isset($_GET['id_statusa_kontakta'])?$_GET['id_statusa_kontakta']:"";
-		
-		
-		if ($id_statusa_kontakta){
-			
-			$this->dao->deleteFromStatusKontakta($id_statusa_kontakta);
-			
-			$msg='Uspesno ste obrisali tip profila kontakata';
+        $id=isset($_GET['id'])?$_GET['id']:$id_product;     //if isn't from get is from product controller
 
-		}else {
-			
-			$msg='Niste obrisali tip proflia kontakta';
+        $page=$this->getPage();
 
-		}
-		
-	}
-	
-	public function showIzvorPodatka(){
-		
-		$dao= new DAO();
-		$lisatizvorapodatka=$this->dao->selectFromIzvorPodatka();
-		
-		$page_basepa='active';
-		$page_vlasnik_baza = 'active';
-		$page_izvorpodatka = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-		
-	}
-	
-	public function noviIzvorPodatka(){
-		
-		$ime_izvora_podatka=isset($_POST['novi_izvor_podatka'])?$_POST['novi_izvor_podatka']:"";
-		
-		
-		$this->dao->insertIntoIzvorPodatka($ime_izvora_podatka);
-		$msg='Uspesno ste upisali izvor podtaka';
-		
-		$lisatizvorapodatka=$this->dao->selectFromIzvorPodatka();
-		
-		$page_basepa='active';
-		$page_vlasnik_baza = 'active';
-		$page_izvorpodatka = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function obrisiIzvorPodatka(){
-		
-	$id_izvora_podatka=isset($_GET['id_izvorapodatka'])?$_GET['id_izvorapodatka']:"";
-	
-		
-		if ($id_izvora_podatka){
-			
-			$this->dao->deleteFromIzvorPodatka($id_izvora_podatka);
-			
-			$msg='Uspesno ste obrisali izvor podatka';
+        $list=$this->selectById($id);
+        $types_list = $this->typeList();
+        $equipment_list=$this->equipmentList();
+        $list_location_1=$this->lOneList();
+        $list_location_2=$this->lTwoList();
+        $list_location_3=$this->lThreeList();
+        $structure_list=$this->structureList();
 
-		}else {
-			
-			$msg='Niste obrisali izvor podatka';
-	
-		}
-		
-	}
-	
+        $page_product='active';
+        ${'page_'.$a['0'].'_'.$a['1']}='active'; //activate card of view or edit
+        include 'view/app_link.php';
+
+    }*/
+
 }
-?>

@@ -1,73 +1,24 @@
 <?php
 namespace Admin\controller;
 
-use Admin\controller\Controller;
-use Admin\model\StructureDao;
+class Structure extends Controller {
 
-class Structure extends Controller{
+    public function showView($data=null){
+        $errors=is_array($data)?$data:array();
+        $list=$this->structure->selectAll();
+        $page=$this->getPage();
+        $page_base = 'active';
+        $page_products = 'active';
+        $Structure = 'active';
+        include 'view/base_files/base_link.php';
+    }
+    
+    public function insert($data){
+        $this->structure->insert($data);
+        $this->showView();
+    }
 
-	public function __construct(){
-		parent::__construct();
-		$this->daostructure = new StructureDao();
-	}
-
-	public function showStructure() {
-		
-		
-		$strlist=$this->daostructure->selectFromStructure();
-		
-		$page_basepa='active';
-		$page_structure = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function newStructure(){
-		
-		$name_structure=isset($_POST['new_structure'])?$_POST['new_structure']:"";
-		
-		
-		$errors=array();
-		
-		if (!is_numeric($name_structure)){
-			$errors['structure']='<br>* Numeric!';
-		}
-		if (count($errors)==0){
-			
-			$this->daostructure->insertIntoStructure($name_structure);
-			
-			$msg='Successfully';
-			
-		}else {
-			
-			$msg='Something is wrong';
-		}
-
-			$strlist=$this->daostructure->selectFromStructure();
-			
-			$page_basepa='active';
-			$page_structure = 'active';
-			$container = 'container';
-			include 'basefiles/base_link.php';
-	}
-	
-	public function deleteStructure(){
-		
-		$id_structure=isset($_GET['id_structure'])?$_GET['id_structure']:"";
-		
-		
-		if ($id_structure){
-			
-			$this->daostructure->deleteFromStructure($id_structure);
-			$msg='Successfully';
-
-		}else {
-			
-			$msg='Something is wrong';
-
-		}
-	}
-
+    public function delete($id){
+        $this->structure->delete($id);
+    }
 }
-
-?>

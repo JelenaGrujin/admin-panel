@@ -1,66 +1,36 @@
 <?php
 namespace Admin\controller;
 
-use Admin\controller\Controller;
-use Admin\model\LocationOneDao;
-
 class LocationOne extends Controller{
 
-	public function __construct(){
+    private $location_one_info = array('new');
 
-		parent::__construct();
-	    $this->daolone = new LocationOneDao();
+    public function showInfo($data=null) {
 
-	}
-
-		public function showLocation() {
+        $errors = is_array($data) ? $data : array();
+		$list=$this->lOneList();
 		
-		
-		
-		$listlocation1=$this->daolone->selectFromLocation1();
-		
-		$page_basepa='active';
+		$page_base='active';
 		$page_location = 'active';
 		$page_location_1 = 'active';
 		$container = 'container';
-		include 'basefiles/base_link.php';
+		include 'view/base_files/base_link.php';
 	}
 	
-	public function newLocation1(){
-		
-		$name_location_1=isset($_POST['new_location_1'])?$_POST['new_location_1']:"";
-		
-		
-		$this->daolone->insertIntoLocation1($name_location_1);
+	public function getData()
+    {
+        $new = isset($_POST['new']) ? $_POST['new'] : "";
+        $post_info = array($new);
+        $combined_array = array_combine($this->location_one_info, $post_info);
 
-		$listlocation1=$this->daolone->selectFromLocation1();
-		
-		$page_basepa='active';
-		$page_location = 'active';
-		$page_location_1 = 'active';
-		$container = 'container';
-		include 'basefiles/base_link.php';
-	}
-	
-	public function deleteLocation1(){
-		
-		$id_location_1=isset($_GET['id_location_1'])?$_GET['id_location_1']:"";
-		
-		
-		if ($id_location_1){
-			
-			$this->daolone->deleteFromLocation1($id_location_1);
-			$msg='Successfully';
+        return $combined_array;
+    }
 
-		}else {
-			
-			$msg='Something is wrong';
+    public function insertInfo($data = null)
+    {
+        $this->locationOne->insertInto($data['new']);
 
-		}
-		
-	}
+        $this->showInfo();
+    }
 
 }
-
-
-?>

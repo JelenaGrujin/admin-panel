@@ -1,147 +1,118 @@
 <?php 
 namespace Admin\classes;
 
-
 class Validator{
 	
 	private $errors=array();
+	private $rule=array();
 	
-	public function trimer($data){
+	public function trim($data){
 		$data = trim($data);
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);
-		return $data;	
+		return $data;
 	}
-	
-	/*public function filterData($datainfo){
-		
-			if (!empty($min_price) && !is_numeric($min_price)){
-				 $errors['min_price']='* number';
-					}
-			if (!empty($commission) && !is_numeric($commission)){
-				$errors['commission']='* number';
-					}
-			if (!empty($deposit) && !is_numeric($deposit)){
-				$errors['deposit']='* number';
-					}	
-			if (!empty($surface_area) && !is_numeric($surface_area)){
-				$errors['surface_area']='* number';
-					}
-			if (!empty($flors) && !is_numeric($flors)){
-				$errors['flors']='* number';
-					}//elseif (!empty($of_flors) && !is_numeric($of_flors)){
-					//	$errors['of_flors']='*';
-						//}//elseif ($flors > $of_flors){
-							//$errors['florsnost']='* uncorectly';
-						//} 
-			if (!empty($num_elevator) && !is_numeric($num_elevator)){
-				$errors['num_elevator']='* number';
-					}
-			if (!empty($construc_year) && !is_numeric($construc_year)){
-				$errors['construc_year']='* number';
-					}
-			if (!empty($celing_height) && !is_numeric($celing_height)){
-				$errors['celing_height']='* number';
-					}
-			if (!empty($level) && !is_numeric($level)){
-				$errors['level']='* number';
-					}
-			if (!empty($salon_m) && !is_numeric($salon_m)){
-				$errors['salon_m']='* number';
-					}
-			if (!empty($num_rooms) && !is_numeric($num_rooms)){
-				$errors['num_rooms']='* number';
-					}
-			if (!empty($num_bath) && !is_numeric($num_bath)){
-				$errors['num_bath']='* unumber';
-					}
-			if (!empty($num_wc) && !is_numeric($num_wc)){
-				$errors['num_wc']='* number';
-					}
-			if (!empty($num_terrace) && !is_numeric($num_terrace)){
-				$errors['num_terrace']='* number';
-					}
-			if (!empty($num_air_con) && !is_numeric($num_air_con)){
-				$errors['num_air_con']='* number';
-					}
-			if(empty($location_data_1)){
-				$errors['location_data_1']='* required';}
-			if(empty($location_data_2)){
-				$errors['location_data_2']='* required';}
-			if(empty($location_data_3)){
-				$errors['location_data_3']='* required';}
-			if(empty($addres_location)){
-				$errors['addres_location']='* required';}
-			if(empty($adres_num)){
-				$errors['adres_num']='*';}
-			if(empty($number)){
-				$errors['number']='*';}
-			if(empty($prod)){
-				$errors['tip_nekretnine']='* required';}
-			if(empty($structure)){
-				$errors['structure']='* required';}
-			if(empty($square)){
-				$errors['square']='* required';
-			}elseif (is_numeric($square)){
-					}else{$errors['square']='* number';}
-			if(empty($price)){
-				$errors['price']='* required';
-			}elseif (is_numeric($price)){
-					}else{$errors['price']='* number';}
-					
-		if (count($errors)==0){
-		
-		}else {
-			$typeslist=$this->daotype->selectFromProductType();
-			$equilist=$this->daoequipment->selectFromEquipment();
-			$listlocation1=$this->daolone->selectFromLocation1();
-			$listlocation2=$this->daoltwo->selectFromLocation2();
-			$listlocation3=$this->daolthree->selectFromLocation3();
-			$strlist=$this->daostructure->selectFromStructure();
-			$page_new_product='active';
-			$page_info='active';
-			$page_productpa='active';
-			include 'productfiles/new_pro_link.php';
-		}
-		
-	}
-	*/
-	public function validate($data, $rules = array() ){
 
+    public function switching($class){
+
+        switch ($class){
+            case 'Admin\controller\NewProduct':
+                $this->rule = ['location_data_1' => ['required'], 'location_data_2' => ['required'], 'location_data_3' => ['required'], 'address_location' => ['required'], 'structure' => ['required'], 'product_type' => ['required'], 'address_num' => ['required'], 'number' => ['required'], 'square' => ['required','numeric'], 'price' => ['required','numeric'], 'num_air_con' => ['numeric'], 'num_garages'=>['numeric'], 'num_terrace' => ['numeric'], 'num_wc' => ['numeric'], 'num_rooms' => ['numeric'], 'salon_m' => ['numeric'], 'level' => ['numeric'], 'ceiling_height' => ['numeric'], 'construction_year' => ['numeric'], 'num_elevator' => ['numeric'], 'floor' => ['numeric','incorrectly'], 'of_floor' => ['numeric'], 'surface_area' => ['numeric'], 'deposit' => ['numeric'], 'commission' => ['numeric'], 'min_price' => ['numeric']];
+                break;
+            case 'Admin\controller\NewOwner':
+                $this->rule = ['e_mail' => ['e_mail'], 'e_mail_owner' => ['e_mail'], 'e_mail_3' => ['e_mail'], 'e_mail_4' => ['e_mail'], 'e_mail_5' => ['e_mail'], 'e_mail_6' => ['e_mail'], 'e_mail_7' => ['e_mail'], 'e_mail_8' => ['e_mail'], 'e_mail_9' => ['e_mail'], 'phone' => ['required','numeric'], 'UMCN' => ['numeric'], 'id_num' => ['numeric'], 'activity_code' => ['numeric'], 'company_num' => ['numeric'], 'tin' => ['numeric'], 'phone_9' => ['numeric'], 'phone_8' => ['numeric'], 'phone_7' => ['numeric'], 'phone_6' => ['numeric'], 'phone_5' => ['numeric'], 'phone_4' => ['numeric'], 'phone_3' => ['numeric'], 'phone_1' => ['numeric']];
+                break;
+            case 'Agent':
+                $this->rule = ['name_surname' => ['required'], 'address' => ['required'], 'username' => ['required'], 'pass' => ['required'],'r_pass'=>['required','match'], 'phone' => ['numeric'], 'e_mail' => ['required','e_mail']];
+                break;
+            case 'photo':
+                $this->rule = ['photo' => ['photo']];
+                break;
+            case 'docs':
+                $this->rule = ['doc' => ['pdf']];
+                break;
+            case 'Type':
+            case 'LocationOne':
+            case 'LocationTwo':
+            case 'LocationThree':
+                $this->rule = ['new' => ['required']];
+                break;
+            case 'Equipment':
+            case 'Structure':
+                $this->rule = ['new' => ['numeric','required']];
+                break;
+        }
+        return $this->rule;
+    }
+
+	public function validate($data, $class){
         foreach($data as $item => $item_value){
-            if(key_exists($item, $rules)){
-                foreach($rules[$item] as $rule => $rule_value){
-
-                    switch ($rule){
+            if(key_exists($item, $this->switching($class))){
+                foreach($this->rule[$item] as $rule => $rule_value){
+                    switch ($rule_value){
                         case 'required':
-                        if(empty($item_value) && $rule_value){
+                        if(empty($item_value)){
                             $this->addError($item,'* required');
                         }
                         break;
 
                         case 'numeric':
-                        if(!is_numeric($item_value) && $rule_value){
-                            $this->addError($item,'* numeric');
+                        if(!empty($item_value)&&!is_numeric($item_value)){
+                            $this->addError($item,'* no');
                         }
+                        break;
+
+                        case 'incorrectly':
+                        if($item_value>$_POST['of_floor']){
+                            $this->addError($item,'* Incorrectly');
+                        }
+                        break;
+
+                        case 'e_mail':
+                            if(!empty($item_value) && !preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,64}$/', $item_value)){
+                                $this->addError($item,'* Incorrectly');
+                            }
+                        break;
+
+                        case 'pdf':
+                            if(count($item_value)>10){
+                                $this->addError($item,'* <br>it is possible to get only 10 pdf');
+                            }
+                            foreach ($item_value['name'] as $i_v){
+                                if(strtolower(pathinfo($i_v, PATHINFO_EXTENSION)) != 'pdf'){
+                                    $this->addError($item,'* Extension must be PDF');
+                                }
+                            }
+                        break;
+
+                        case 'photo':
+                            if(count($item_value)>40){
+                                $this->addError($item,'* <br>it is possible to get only 40 photos');
+                            }
+                            foreach ($item_value as $i_v){
+                                if(strtolower(pathinfo($i_v, PATHINFO_EXTENSION)) != ("jpg" || "png" || "jpeg" || "gif" )){
+                                    $this->addError($item,'* <br>Extension must be JPG, PNG, JPEG or GIF');
+                                }
+                            }
+                        break;
+
+                        case 'match':
+                            if ($item_value!==$_POST['password']){
+                                $this->addError($item,'* <br>Passwords not match');
+                            }
                         break;
                     }
                 }
             }
-        }    
+        }
     }
 
     private function addError($item, $error){
-        $this->errors[$item][] = $error;
+        $this->errors[$item] = $error;
     }
-
 
     public function error(){
         if(empty($this->errors)) return false;
         return $this->errors;
     }
-
-	
 }
-
-
-?>
